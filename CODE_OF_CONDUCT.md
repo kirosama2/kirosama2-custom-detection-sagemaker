@@ -1,2 +1,2 @@
 ## Code of Conduct
-This
+This project has adopted the [Amazon Open
