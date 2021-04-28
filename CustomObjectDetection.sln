@@ -12,4 +12,4 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImageProcessor", "ImageProcessor\ImageProcessor.csproj", "{24703EF5-7F59-4827-A004-63D0700D8F7B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SessionProcessor", "SessionProcessor\Sessi
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SessionProcessor", "SessionProcessor\SessionProcessor.csproj", "{6839DADF-BCA
