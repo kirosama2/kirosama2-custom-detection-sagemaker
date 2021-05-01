@@ -13,4 +13,5 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImageProcessor", "ImageProcessor\ImageProcessor.csproj", "{24703EF5-7F59-4827-A004-63D0700D8F7B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SessionProcessor", "SessionProcessor\SessionProcessor.csproj", "{6839DADF-BCA0-46B0-AB92-B7CD0DE8DA41}"
-EndPro
+EndProject
+Project("{9A19103F-16F
