@@ -14,4 +14,5 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImageProcessor", "ImageProc
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SessionProcessor", "SessionProcessor\SessionProcessor.csproj", "{6839DADF-BCA0-46B0-AB92-B7CD0DE8DA41}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModelBuilder", "ModelBuilder\ModelBuilder.csproj", "{E892EBBB-0C6F
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModelBuilder", "ModelBuilder\ModelBuilder.csproj", "{E892EBBB-0C6F-42D8-B21B-C7A1D90E489B}"
+E
