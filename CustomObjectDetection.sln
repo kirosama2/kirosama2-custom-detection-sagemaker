@@ -19,4 +19,4 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests", "Tests\Tests.csproj", "{C773B7E6-7DFF-4075-9104-6CE828A38311}"
 EndProject
 Global
-	GlobalSection(Solu
+	GlobalSection(SolutionConfigurationPlatforms) = preSolu
