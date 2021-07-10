@@ -1,2 +1,3 @@
 #!/bin/bash
-echo "Installin
+echo "Installing required modules."
+sudo pip in
