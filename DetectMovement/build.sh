@@ -1,3 +1,4 @@
 #!/bin/bash
 echo "Installing required modules."
-sudo pip in
+sudo pip install -r requirements.txt -t .
+echo "R
