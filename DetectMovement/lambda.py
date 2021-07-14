@@ -61,3 +61,25 @@ def push_to_s3(frame, movement):
         response = s3.put_object(Body=jpg_data.tostring(),
                                  Bucket=bucketName,
                                  ContentType='image/jpeg',
+                                 Key=key,    
+                                 Metadata={
+                                    'movement': str(movement)
+                                 })
+    except Exception as e:
+        log("Pushing to S3 failed: " + str(e))
+
+def loop():
+    try:  
+        nextFrameIndexTime = datetime.datetime.now() + datetime.timedelta(minutes = 1)
+        log("Inside main loop.")
+        ret, previousFrame = awscam.getLastFrame()
+        doLoop = True
+        while doLoop:
+            ret, currentFrame = awscam.getLastFrame()
+            err = mse(previousFrame, currentFrame)
+            if (err > motionThreshold) or (datetime.datetime.now() >= nextFrameIndexTime):
+                push_to_s3(currentFrame, err)
+                nextFrameIndexTime = datetime.datetime.now() + datetime.timedelta(minutes = 1)
+            previousFrame = currentFrame
+    except Exception as e:
+        log("Error: " + str(e))
