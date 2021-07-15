@@ -83,3 +83,11 @@ def loop():
             previousFrame = currentFrame
     except Exception as e:
         log("Error: " + str(e))
+
+    Timer(15, loop).start()
+
+log("loading config values..")
+load_config_values()
+
+log("Starting program...")
+loop()
