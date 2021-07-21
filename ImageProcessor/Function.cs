@@ -61,3 +61,35 @@ namespace ImageProcessor
                     {
                         Name = observationBoundingBoxParameterName
                     });
+                    cameraParameters.Add(observationBoundingBoxParameterName, getResult.Parameter.Value);
+                    context.Logger.LogLine(
+                        $"Set {observationBoundingBoxParameterName} = {cameraParameters[observationBoundingBoxParameterName]}");
+                }
+                catch (Exception exception)
+                {
+                    context.Logger.LogLine($"Didn't add parameter. {observationBoundingBoxParameterName}");
+                    context.Logger.LogLine(exception.Message);
+                }
+
+            if (!cameraParameters.ContainsKey(classNamesParameterName))
+            {
+                var getResult = await ssm.GetParameterAsync(new GetParameterRequest
+                {
+                    Name = classNamesParameterName
+                });
+                cameraParameters.Add(classNamesParameterName, getResult.Parameter.Value);
+                context.Logger.LogLine($"Set {classNamesParameterName} = {cameraParameters[classNamesParameterName]}");
+            }
+
+            if (!cameraParameters.ContainsKey(sceneCodeParameterName))
+            {
+                var getResult = await ssm.GetParameterAsync(new GetParameterRequest
+                {
+                    Name = sceneCodeParameterName
+                });
+                cameraParameters.Add(sceneCodeParameterName, getResult.Parameter.Value);
+                context.Logger.LogLine($"Set {sceneCodeParameterName} = {cameraParameters[sceneCodeParameterName]}");
+            }
+
+            var memoryStream = new MemoryStream();
+            await s3GetResult.ResponseStream.CopyToAsync(memoryStream);
