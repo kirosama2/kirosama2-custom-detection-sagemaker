@@ -93,3 +93,50 @@ namespace ImageProcessor
 
             var memoryStream = new MemoryStream();
             await s3GetResult.ResponseStream.CopyToAsync(memoryStream);
+
+            // Crop the area of interest.
+            // TODO: Get the x, y, w, h from parmeter store.
+
+            var croppedMemoryStream = new MemoryStream();
+            var cropImage = cameraParameters.ContainsKey(observationBoundingBoxParameterName);
+            if (cropImage)
+            {
+                var parts = cameraParameters[observationBoundingBoxParameterName].Split(',');
+                memoryStream.Position = 0;
+                var sourceImage = Image.Load(memoryStream);
+                var x = int.Parse(parts[0]);
+                var y = int.Parse(parts[1]);
+                var lowerX = int.Parse(parts[2]);
+                var lowerY = int.Parse(parts[3]);
+                var w = lowerX - x;
+                var h = lowerY - y;
+                sourceImage.Mutate(i => i.Crop(new Rectangle(x, y, w, h)));
+
+                context.Logger.LogLine("Trying to save croped image.");
+                sourceImage.Save(croppedMemoryStream, new JpegEncoder());
+                croppedMemoryStream.Position = 0;
+            }
+
+
+            var labelsResult = await rekognition.DetectLabelsAsync(new DetectLabelsRequest
+            {
+                Image = new Amazon.Rekognition.Model.Image
+                {
+                    Bytes = cropImage ? croppedMemoryStream : memoryStream
+                },
+                MaxLabels = 100,
+                MinConfidence = 70
+            });
+
+            if (cropImage)
+                croppedMemoryStream.Position = 0;
+            else
+                memoryStream.Position = 0;
+
+            var metricData = new List<MetricDatum>();
+
+
+            var personMetric = new MetricDatum
+            {
+                MetricName = "Confidence",
+                StorageResolution = 1,
