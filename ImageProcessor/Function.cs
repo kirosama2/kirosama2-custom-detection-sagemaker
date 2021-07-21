@@ -33,3 +33,31 @@ namespace ImageProcessor
         private readonly IAmazonCloudWatch cloudWatch = new AmazonCloudWatchClient();
         private readonly IAmazonRekognition rekognition = new AmazonRekognitionClient();
         private readonly IAmazonS3 s3 = new AmazonS3Client();
+        private readonly IAmazonSageMakerRuntime sageMakerRuntime = new AmazonSageMakerRuntimeClient();
+        private readonly IAmazonSimpleSystemsManagement ssm = new AmazonSimpleSystemsManagementClient();
+
+        public async Task FunctionHandler(S3Event s3Event, ILambdaContext context)
+        {
+            var tasks = new List<Task>();
+            foreach (var record in s3Event.Records)
+                tasks.Add(ProcessRecord(record, context));
+            await Task.WhenAll(tasks);
+        }
+
+        public async Task ProcessRecord(S3EventNotification.S3EventNotificationRecord record, ILambdaContext context)
+        {
+            var cameraKey = record.S3.Object.Key.Split('/')[1];
+
+            var s3GetResult = await s3.GetObjectAsync(record.S3.Bucket.Name, record.S3.Object.Key);
+
+            var classNamesParameterName = $"/Cameras/{cameraKey}/ClassNames";
+            var sceneCodeParameterName = $"/Cameras/{cameraKey}/SceneCode";
+            var observationBoundingBoxParameterName = $"/Cameras/{cameraKey}/ObservationBoundingBox";
+
+            if (!cameraParameters.ContainsKey(observationBoundingBoxParameterName))
+                try
+                {
+                    var getResult = await ssm.GetParameterAsync(new GetParameterRequest
+                    {
+                        Name = observationBoundingBoxParameterName
+                    });
