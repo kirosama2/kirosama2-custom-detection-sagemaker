@@ -199,3 +199,38 @@ namespace ImageProcessor
                 var classNames = cameraParameters[classNamesParameterName].Split(',');
                 var predictions = new List<Prediction>();
                 foreach (var pr in predictionResult)
+                    predictions.Add(new Prediction
+                    {
+                        ClassName = classNames[Convert.ToInt32(pr[0].Value)],
+                        Confidence = Convert.ToDouble(pr[1].Value) * 100
+                    });
+
+                foreach (var classNotPredicted in classNames.Where(cn => predictions.All(p => p.ClassName != cn)))
+                    predictions.Add(new Prediction
+                    {
+                        ClassName = classNotPredicted,
+                        Confidence = 0
+                    });
+
+                foreach (var classGroup in predictions.GroupBy(p => p.ClassName))
+                    metricData.Add(new MetricDatum
+                    {
+                        MetricName = "Confidence",
+                        StorageResolution = 1,
+                        TimestampUtc = DateTime.UtcNow,
+                        Unit = StandardUnit.Percent,
+                        Dimensions = new List<Dimension>
+                        {
+                            new Dimension {Name = "CameraKey", Value = cameraKey},
+                            new Dimension {Name = "Source", Value = cameraParameters[sceneCodeParameterName]},
+                            new Dimension {Name = "Label", Value = classGroup.Key}
+                        },
+                        StatisticValues = new StatisticSet
+                        {
+                            Minimum = classGroup.Min(c => c.Confidence),
+                            Maximum = classGroup.Max(c => c.Confidence),
+                            Sum = classGroup.Count(),
+                            SampleCount = classGroup.Count()
+                        }
+                    });
+            }
