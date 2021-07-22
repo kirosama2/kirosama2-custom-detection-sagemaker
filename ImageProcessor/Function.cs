@@ -140,3 +140,34 @@ namespace ImageProcessor
             {
                 MetricName = "Confidence",
                 StorageResolution = 1,
+                TimestampUtc = DateTime.UtcNow,
+                Unit = StandardUnit.Percent,
+                Dimensions = new List<Dimension>
+                {
+                    new Dimension {Name = "CameraKey", Value = cameraKey},
+                    new Dimension {Name = "Source", Value = "Rekognition"},
+                    new Dimension {Name = "Label", Value = "Person"}
+                }
+            };
+
+            if (labelsResult.Labels.Any(label => label.Name == "Person"))
+            {
+                var confidence = Convert.ToDouble(labelsResult.Labels.Single(l => l.Name == "Person").Confidence);
+                personMetric.StatisticValues = new StatisticSet
+                {
+                    Minimum = confidence,
+                    Maximum = confidence,
+                    SampleCount = 1,
+                    Sum = 1
+                };
+            }
+            else
+            {
+                personMetric.StatisticValues = new StatisticSet
+                {
+                    Minimum = 0,
+                    Maximum = 0,
+                    SampleCount = 1,
+                    Sum = 1
+                };
+            }
