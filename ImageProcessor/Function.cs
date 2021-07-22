@@ -171,3 +171,31 @@ namespace ImageProcessor
                     Sum = 1
                 };
             }
+
+            metricData.Add(personMetric);
+
+
+            var objectDetectionResult = await sageMakerRuntime.InvokeEndpointAsync(new InvokeEndpointRequest
+            {
+                Accept = "application/jsonlines",
+                ContentType = "application/x-image",
+                EndpointName = cameraParameters[sceneCodeParameterName],
+                Body = cropImage ? croppedMemoryStream : memoryStream
+            });
+
+            if (cropImage)
+                croppedMemoryStream.Close();
+            else
+                memoryStream.Close();
+
+            using (var streamReader = new StreamReader(objectDetectionResult.Body))
+            {
+                var json = streamReader.ReadToEnd();
+
+                context.Logger.Log($"SageMaker Endpoint Result: {json}");
+
+                var predictionResult = JsonConvert.DeserializeObject<dynamic>(json).prediction;
+
+                var classNames = cameraParameters[classNamesParameterName].Split(',');
+                var predictions = new List<Prediction>();
+                foreach (var pr in predictionResult)
