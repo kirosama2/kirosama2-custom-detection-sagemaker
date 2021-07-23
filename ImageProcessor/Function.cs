@@ -234,3 +234,18 @@ namespace ImageProcessor
                         }
                     });
             }
+
+            await cloudWatch.PutMetricDataAsync(new PutMetricDataRequest
+            {
+                Namespace = "Cameras",
+                MetricData = metricData
+            });
+        }
+    }
+
+    public class Prediction
+    {
+        public string ClassName { get; set; }
+        public double Confidence { get; set; }
+    }
+}
