@@ -1,4 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <G
