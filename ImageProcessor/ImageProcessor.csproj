@@ -3,4 +3,4 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
-    <AWSProj
+    <AWSProjectType>Lambda</AWSProjectTy
