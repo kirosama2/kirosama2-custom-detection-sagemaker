@@ -6,4 +6,5 @@
     <AWSProjectType>Lambda</AWSProjectType>
   </PropertyGroup>
 
-  <Item
+  <ItemGroup>
+    <PackageReference Include="Am
