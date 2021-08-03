@@ -7,4 +7,4 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Am
+    <PackageReference Include="Amazon.Lambda.Core" Version="1.
