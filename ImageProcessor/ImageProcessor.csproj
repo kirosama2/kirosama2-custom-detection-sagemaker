@@ -9,4 +9,4 @@
   <ItemGroup>
     <PackageReference Include="Amazon.Lambda.Core" Version="1.0.0" />
     <PackageReference Include="Amazon.Lambda.S3Events" Version="1.0.2" />
-    <PackageReference In
+    <PackageReference Include="Amazon.Lambda.Serialization
