@@ -10,4 +10,5 @@
     <PackageReference Include="Amazon.Lambda.Core" Version="1.0.0" />
     <PackageReference Include="Amazon.Lambda.S3Events" Version="1.0.2" />
     <PackageReference Include="Amazon.Lambda.Serialization.Json" Version="1.4.0" />
-    <PackageReference Include="AWSSDK.Clo
+    <PackageReference Include="AWSSDK.CloudWatch" Version="3.3.10.6" />
+    <P
