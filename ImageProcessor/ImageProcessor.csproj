@@ -11,4 +11,4 @@
     <PackageReference Include="Amazon.Lambda.S3Events" Version="1.0.2" />
     <PackageReference Include="Amazon.Lambda.Serialization.Json" Version="1.4.0" />
     <PackageReference Include="AWSSDK.CloudWatch" Version="3.3.10.6" />
-    <PackageReference Include="AWSSDK.Rekogn
+    <PackageReference Include="AWSSDK.Rekognition" Version="3.3.13.6" />
