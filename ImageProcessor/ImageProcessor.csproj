@@ -15,4 +15,4 @@
     <PackageReference Include="AWSSDK.SageMakerRuntime" Version="3.3.1.27" />
     <PackageReference Include="AWSSDK.SimpleSystemsManagement" Version="3.3.37.6" />
     <PackageReference Include="SixLabors.ImageSharp" Version="1.0.0-beta0005" />
-    <PackageReference Include="SixLa
+    <PackageReference Include="SixLabors.ImageSharp.Drawing" Version="1.0
