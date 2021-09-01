@@ -1,0 +1,7 @@
+
+﻿<script src="https://assets.crowd.aws/crowd-html-elements.js"></script>
+<crowd-form>
+  <crowd-bounding-box
+    name="boundingBox"
+    src="{{ task.input.taskObject | grant_read_access }}"
+    header="Draw bounding boxes around the objects to label."
