@@ -2,4 +2,5 @@
 
   <PropertyGroup>
     <OutputType>Library</OutputType>
-    <TargetFramework>netcor
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+	<Generat
