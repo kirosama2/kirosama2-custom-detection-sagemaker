@@ -1,4 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Library</Out
+    <OutputType>Library</OutputType>
+    <TargetFramework>netcor
