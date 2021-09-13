@@ -3,4 +3,4 @@
   <PropertyGroup>
     <OutputType>Library</OutputType>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-	<Generat
+	<GenerateRuntimeConfigurationFile
