@@ -3,4 +3,5 @@
   <PropertyGroup>
     <OutputType>Library</OutputType>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-	<GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfiguration
+	<GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
+    <SignAssembly>false</Si
