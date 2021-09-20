@@ -5,4 +5,5 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
 	<GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
     <SignAssembly>false</SignAssembly>
-    <AssemblyOriginatorKeyFile>signing-key.snk</Assembl
+    <AssemblyOriginatorKeyFile>signing-key.snk</AssemblyOriginatorKeyFile>
+    <Appli
