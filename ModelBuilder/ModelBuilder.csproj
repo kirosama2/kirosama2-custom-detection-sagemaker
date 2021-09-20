@@ -6,4 +6,5 @@
 	<GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
     <SignAssembly>false</SignAssembly>
     <AssemblyOriginatorKeyFile>signing-key.snk</AssemblyOriginatorKeyFile>
-    <Appli
+    <ApplicationIcon />
+    <StartupObjec
