@@ -10,4 +10,4 @@
     <StartupObject />
   </PropertyGroup>
 
-  <PropertyGro
+  <PropertyGroup Condition="'$(Configuration)|
