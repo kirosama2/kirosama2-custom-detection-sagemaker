@@ -11,4 +11,4 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <GenerateSe
+    <GenerateSerializationAssemblies>Of
