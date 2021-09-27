@@ -10,4 +10,4 @@
     <StartupObject />
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCP
