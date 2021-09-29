@@ -15,4 +15,4 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Rem
+    <None Remove="BoundingBoxTemplate.xh
