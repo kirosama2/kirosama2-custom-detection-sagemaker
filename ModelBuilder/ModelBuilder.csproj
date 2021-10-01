@@ -16,4 +16,6 @@
 
   <ItemGroup>
     <None Remove="BoundingBoxTemplate.xhtml" />
-    <None Remove="Segme
+    <None Remove="Segmentation.xhtml" />
+  </ItemGroup>
+
