@@ -15,4 +15,5 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="BoundingBoxTemplate.xh
+    <None Remove="BoundingBoxTemplate.xhtml" />
+    <None Remove="Segme
