@@ -19,3 +19,5 @@
     <None Remove="Segmentation.xhtml" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Includ
