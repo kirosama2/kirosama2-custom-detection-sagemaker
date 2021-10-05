@@ -21,4 +21,4 @@
 
   <ItemGroup>
     <Content Include="BoundingBoxTemplate.xhtml">
-      <CopyToOutputDirectory>Alway
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
