@@ -22,3 +22,5 @@
   <ItemGroup>
     <Content Include="BoundingBoxTemplate.xhtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content I
