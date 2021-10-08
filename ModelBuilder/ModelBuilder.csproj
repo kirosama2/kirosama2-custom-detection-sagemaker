@@ -23,4 +23,5 @@
     <Content Include="BoundingBoxTemplate.xhtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content I
+    <Content Include="Segmentation.xhtml">
+     
