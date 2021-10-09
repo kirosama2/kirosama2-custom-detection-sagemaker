@@ -24,4 +24,8 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Segmentation.xhtml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirect
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+ 
