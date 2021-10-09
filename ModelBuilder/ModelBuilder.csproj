@@ -24,4 +24,4 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Segmentation.xhtml">
-     
+      <CopyToOutputDirectory>Alwa
