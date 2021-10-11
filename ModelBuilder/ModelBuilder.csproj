@@ -30,3 +30,4 @@
 
   <ItemGroup>
     <PackageReference Include="AWSSDK.CloudWatch" Version="3.3.10.12" />
+    <PackageReference Incl
