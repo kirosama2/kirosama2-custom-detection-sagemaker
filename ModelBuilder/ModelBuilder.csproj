@@ -30,4 +30,5 @@
 
   <ItemGroup>
     <PackageReference Include="AWSSDK.CloudWatch" Version="3.3.10.12" />
-    <PackageReference Include="AWSSDK.IdentityMan
+    <PackageReference Include="AWSSDK.IdentityManagement">
+      <Version>3
