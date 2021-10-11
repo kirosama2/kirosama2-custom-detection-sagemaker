@@ -33,4 +33,4 @@
     <PackageReference Include="AWSSDK.IdentityManagement">
       <Version>3.3.0</Version>
     </PackageReference>
-    <Package
+    <PackageReference Include="AW
