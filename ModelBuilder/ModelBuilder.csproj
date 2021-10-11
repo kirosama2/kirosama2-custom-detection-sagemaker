@@ -32,4 +32,5 @@
     <PackageReference Include="AWSSDK.CloudWatch" Version="3.3.10.12" />
     <PackageReference Include="AWSSDK.IdentityManagement">
       <Version>3.3.0</Version>
-    </Pac
+    </PackageReference>
+    <Package
