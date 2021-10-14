@@ -35,4 +35,4 @@
     </PackageReference>
     <PackageReference Include="AWSSDK.S3" Version="3.3.0" />
     <PackageReference Include="AWSSDK.SageMaker" Version="3.3.16.1" />
-    <PackageReference I
+    <PackageReference Include="AWSSDK.SageMakerRuntime" Versi
