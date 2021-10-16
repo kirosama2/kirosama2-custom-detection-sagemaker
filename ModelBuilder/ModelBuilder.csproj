@@ -39,4 +39,4 @@
     <PackageReference Include="AWSSDK.SecurityToken">
       <Version>3.3.0</Version>
     </PackageReference>
-    <Pa
+    <PackageReference Include=
