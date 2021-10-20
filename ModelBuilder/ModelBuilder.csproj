@@ -41,4 +41,5 @@
     </PackageReference>
     <PackageReference Include="AWSSDK.SimpleSystemsManagement" Version="3.3.37.1" />
     <PackageReference Include="AWSSDK.SQS" Version="3.3.3.40" />
-    <PackageReference Include="Do
+    <PackageReference Include="DotStep.Core">
+      <Version>2.0
