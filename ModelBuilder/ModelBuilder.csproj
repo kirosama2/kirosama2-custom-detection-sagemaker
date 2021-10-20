@@ -46,4 +46,5 @@
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
       <Version>13.0.1</Version>
-    </PackageR
+    </PackageReference>
+    <PackageReference 
