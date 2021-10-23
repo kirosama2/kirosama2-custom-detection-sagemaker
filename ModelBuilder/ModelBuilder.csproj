@@ -47,4 +47,5 @@
     <PackageReference Include="Newtonsoft.Json">
       <Version>13.0.1</Version>
     </PackageReference>
-    <PackageReference Include="SixLabors.ImageS
+    <PackageReference Include="SixLabors.ImageSharp" Version="1.0.0-beta0005" />
+   
