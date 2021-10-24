@@ -48,4 +48,4 @@
       <Version>13.0.1</Version>
     </PackageReference>
     <PackageReference Include="SixLabors.ImageSharp" Version="1.0.0-beta0005" />
-    <PackageReference Include="SixLabors.ImageSharp.Dr
+    <PackageReference Include="SixLabors.ImageSharp.Drawing" Version="1.0.0-b
