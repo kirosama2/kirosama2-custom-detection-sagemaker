@@ -40,3 +40,27 @@ namespace ModelBuilder.StateMachines
     public sealed class ProvisionScene : StateMachine<ProvisionScene.Initialize>
     {
         public class Context : IContext
+        {
+            [DotStep.Core.Required]
+            public List<string> ClassNames { get; set; }
+            [DotStep.Core.Required]
+            public string SceneImageLocation { get; set; }
+            [DotStep.Core.Required]
+            public string Region { get; set; }
+            [DotStep.Core.Required]
+            public string CameraKey { get; set; }
+            public string CameraBucket { get; set; }
+
+            public string SceneBackgroundLocation { get; set; }
+            public bool GenerateSceneBackground { get; set; }
+           
+            public string WorkteamArn { get; set; }
+            public string LabelingRoleArn { get; set; }
+
+            public string SceneProvisioningJobId { get; set; }
+            public string SceneProvisioningJobWorkspace { get; set; }
+            public string InputManifestLocation { get; set; }
+            public string UiTemplateLocation { get; set; }
+
+            public int LabelingJobPercentComplete { get; set; }
+
