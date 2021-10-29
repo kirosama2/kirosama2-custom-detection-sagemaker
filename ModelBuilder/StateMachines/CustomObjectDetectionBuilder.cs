@@ -64,3 +64,32 @@ namespace ModelBuilder.StateMachines
 
             public int LabelingJobPercentComplete { get; set; }
 
+
+            public string SceneBackgroundGenerationQueueUrl { get; set; }
+            public int BackgroundImagePercentComplete { get; set; }
+
+            public int ImagesGeneratedPerClass { get; set; }
+
+            public int NumberOfTrainingSamples { get; set; }
+
+            public string SceneCode { get; set; }
+            public int TrainingJobPercentComplete { get; set; }
+            public int EndpointPercentComplete { get; set; }
+
+            public int MotionThreshold { get; set; }
+        }
+
+
+
+        [DotStep.Core.Action(ActionName = "*")]
+        public sealed class Initialize : TaskState<Context, CreateSegmentationLabelingJob>
+        {
+            IAmazonSimpleSystemsManagement ssm = new AmazonSimpleSystemsManagementClient();
+            IAmazonS3 s3 = new AmazonS3Client();
+
+            public override async Task<Context> Execute(Context context)
+            {
+                context.SceneProvisioningJobId = $"spj-{Guid.NewGuid().ToString().Substring("e9857953-2fc2-477e-b347-".Length, "6053c7f7b710".Length).ToLower()}";
+                
+                if (context.ClassNames.Count < 1)
+                    throw new Exception("ClassNames are required.");
