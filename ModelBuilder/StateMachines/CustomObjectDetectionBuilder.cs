@@ -93,3 +93,29 @@ namespace ModelBuilder.StateMachines
                 
                 if (context.ClassNames.Count < 1)
                     throw new Exception("ClassNames are required.");
+
+                var parameters = await ssm.GetParametersAsync(new GetParametersRequest
+                {
+                    Names = new List<string>
+                    {
+                        "/scene-provision/WorkteamArn",
+                        "/scene-provision/LabelingRoleArn",
+                        "/scene-provision/JobWorkspace",
+                        "/scene-provision/SceneBackgroundGenerationQueueUrl"
+                    }
+                });
+
+               
+                context.WorkteamArn = parameters.Parameters.Single(p => p.Name == "/scene-provision/WorkteamArn").Value;
+                context.LabelingRoleArn = parameters.Parameters.Single(p => p.Name == "/scene-provision/LabelingRoleArn").Value;
+                context.SceneProvisioningJobWorkspace =
+                    $"{parameters.Parameters.Single(p => p.Name == "/scene-provision/JobWorkspace").Value}{context.SceneProvisioningJobId}/";
+                
+                context.GenerateSceneBackground = string.IsNullOrEmpty(context.SceneBackgroundLocation);
+
+                if (context.GenerateSceneBackground)
+                    context.SceneBackgroundGenerationQueueUrl = parameters.Parameters
+                        .Single(p => p.Name == "/scene-provision/SceneBackgroundGenerationQueueUrl").Value;
+                else
+                {
+                    await s3.CopyObjectAsync(context.SceneBackgroundLocation.S3Bucket(),
