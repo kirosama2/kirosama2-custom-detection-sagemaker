@@ -119,3 +119,37 @@ namespace ModelBuilder.StateMachines
                 else
                 {
                     await s3.CopyObjectAsync(context.SceneBackgroundLocation.S3Bucket(),
+                        context.SceneBackgroundLocation.S3Key(),
+                        context.SceneProvisioningJobWorkspace.S3Bucket(),
+                        context.SceneProvisioningJobWorkspace.S3Key() + "scene-background.jpg");
+                    context.BackgroundImagePercentComplete = 100;
+                    context.SceneBackgroundLocation = context.SceneProvisioningJobWorkspace + "scene-background.jpg";
+                }
+
+                if (context.MotionThreshold <= 0)
+                    context.MotionThreshold = 200;
+
+                var inputManifestBody = $"{{\"source-ref\": \"{context.SceneProvisioningJobWorkspace}input-scene.jpg\"}}";
+                context.InputManifestLocation = $"{context.SceneProvisioningJobWorkspace}input-manifest.json";
+
+                context.UiTemplateLocation = $"{context.SceneProvisioningJobWorkspace}Segmentation.xhtml";
+                var uiTemplateBody = File.OpenText("Segmentation.xhtml").ReadToEnd();
+
+                if (string.IsNullOrEmpty(context.SceneCode))
+                {
+                    var locationParts = context.SceneImageLocation.Split('/');
+                    context.SceneCode = locationParts[locationParts.Length - 1];
+                    context.SceneCode = context.SceneCode.Split('.')[0];
+                    context.SceneCode = context.SceneCode.Replace("-", string.Empty).Replace("_", string.Empty).ToLower();
+                }
+
+                if (string.IsNullOrEmpty(context.CameraBucket))
+                    context.CameraBucket = context.SceneProvisioningJobWorkspace.S3Bucket();
+
+                await Task.WhenAll(new List<Task>
+                {
+                    ssm.PutParameterAsync(new PutParameterRequest
+                    {
+                        Name = $"/Cameras/{context.CameraKey}/ClassNames",
+                        Value = string.Join(',', context.ClassNames),
+                        Type = Amazon.SimpleSystemsManagement.ParameterType.String,
