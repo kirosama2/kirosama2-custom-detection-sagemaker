@@ -153,3 +153,41 @@ namespace ModelBuilder.StateMachines
                         Name = $"/Cameras/{context.CameraKey}/ClassNames",
                         Value = string.Join(',', context.ClassNames),
                         Type = Amazon.SimpleSystemsManagement.ParameterType.String,
+                        Overwrite = true
+                    }),
+                    ssm.PutParameterAsync(new PutParameterRequest
+                    {
+                        Name = $"/Cameras/{context.CameraKey}/SceneCode",
+                        Value = context.SceneCode,
+                        Type = Amazon.SimpleSystemsManagement.ParameterType.String,
+                        Overwrite = true
+                    }),
+                    ssm.PutParameterAsync(new PutParameterRequest
+                    {
+                        Name = $"/Cameras/{context.CameraKey}/CameraBucket",
+                        Value = context.CameraBucket,
+                        Type = Amazon.SimpleSystemsManagement.ParameterType.String,
+                        Overwrite = true
+                    }),
+                    ssm.PutParameterAsync(new PutParameterRequest
+                    {
+                        Name = $"/Cameras/{context.CameraKey}/Enabled",
+                        Value = "False",
+                        Type = Amazon.SimpleSystemsManagement.ParameterType.String,
+                        Overwrite = true
+                    }),
+                    ssm.PutParameterAsync(new PutParameterRequest
+                    {
+                        Name = $"/Cameras/{context.CameraKey}/MotionThreshold",
+                        Value = Convert.ToString(context.MotionThreshold),
+                        Type = Amazon.SimpleSystemsManagement.ParameterType.String,
+                        Overwrite = true
+                    }),
+                    s3.PutObjectAsync(new PutObjectRequest
+                    {
+                        BucketName = context.UiTemplateLocation.S3Bucket(),
+                        Key = context.UiTemplateLocation.S3Key(),
+                        ContentType = "application/xhtml+xml",
+                        ContentBody = uiTemplateBody
+                    }),
+                    s3.PutObjectAsync(new PutObjectRequest
