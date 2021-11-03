@@ -348,3 +348,30 @@ namespace ModelBuilder.StateMachines
                             DataSource = new LabelingJobDataSource
                             {
                                 S3DataSource = new LabelingJobS3DataSource
+                                {
+                                    ManifestS3Uri = context.InputManifestLocation
+                                }
+                            }
+                        },
+                        OutputConfig = new LabelingJobOutputConfig
+                        {
+                            S3OutputPath = $"{context.SceneProvisioningJobWorkspace}output/"
+                        }
+                    });
+                    /*
+                }
+                catch (Exception e)
+                {
+                    Console.Write(e);
+                    if (e.InnerException is HttpErrorResponseException sme)
+                    {
+                        var stream = sme.Response.ResponseBody.OpenResponse();
+                        var sr = new StreamReader(stream);
+                        var text = sr.ReadToEnd();
+                        Console.WriteLine(text);
+                    }
+                }
+                */
+                return context;
+            }
+        }
