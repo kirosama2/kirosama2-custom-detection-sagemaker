@@ -256,3 +256,26 @@ namespace ModelBuilder.StateMachines
                         context.LabelingJobPercentComplete = 50;
                         break;
                     case "Completed":
+                        context.LabelingJobPercentComplete = 100;
+                        break;
+                    default: throw new Exception($"Labeling job status = {result.LabelingJobStatus}.");
+                }
+                Console.WriteLine($"Percent complete: {context.LabelingJobPercentComplete}");
+
+                return context;
+            }
+        }
+
+        [DotStep.Core.Action(ActionName = "*")]
+        public sealed class CreateSegmentationLabelingJob : TaskState<Context, CheckIfJobComplete>
+        {
+            readonly IAmazonSageMaker sageMaker = new AmazonSageMakerClient();
+            readonly IAmazonS3 s3 = new AmazonS3Client();
+
+            public override async Task<Context> Execute(Context context)
+            {
+
+                Console.Write(JsonConvert.SerializeObject(context));
+
+                //var resp = await sageMaker.DescribeLabelingJobAsync(new DescribeLabelingJobRequest
+               // {
