@@ -191,3 +191,37 @@ namespace ModelBuilder.StateMachines
                         ContentBody = uiTemplateBody
                     }),
                     s3.PutObjectAsync(new PutObjectRequest
+                    {
+                        BucketName = context.InputManifestLocation.S3Bucket(),
+                        Key = context.InputManifestLocation.S3Key(),
+                        ContentType = "application/json",
+                        ContentBody = inputManifestBody
+                    }),
+                    s3.PutObjectAsync(new PutObjectRequest
+                    {
+                        BucketName = context.SceneProvisioningJobWorkspace.S3Bucket(),
+                        Key = context.SceneProvisioningJobWorkspace.S3Key() + "classes.csv",
+                        ContentType = "text/csv",
+                        ContentBody = string.Join(',', context.ClassNames)
+                    }),
+                    s3.CopyObjectAsync(new CopyObjectRequest
+                    {
+                        SourceBucket = context.SceneImageLocation.S3Bucket(),
+                        SourceKey = context.SceneImageLocation.S3Key(),
+                        DestinationBucket = context.SceneProvisioningJobWorkspace.S3Bucket(),
+                        DestinationKey = $"{context.SceneProvisioningJobWorkspace.S3Key()}input-scene.jpg",
+                        ContentType = "image/jpg"
+                    })
+                });
+
+                if (context.ImagesGeneratedPerClass < 1)
+                    context.ImagesGeneratedPerClass = 10;
+
+
+                    
+                return context;
+            }
+        }
+
+
+        public sealed class CheckIfJobComplete : ChoiceState<ExtractPolygons>
