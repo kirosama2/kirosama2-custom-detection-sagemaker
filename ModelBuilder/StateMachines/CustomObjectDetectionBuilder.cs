@@ -318,3 +318,33 @@ namespace ModelBuilder.StateMachines
                         RoleArn = context.LabelingRoleArn,
                         
                         HumanTaskConfig = new HumanTaskConfig
+                        {
+                            TaskKeywords = new List<string>
+                            {
+                                "Images",
+                                "image segmentation"
+                            },
+                            PreHumanTaskLambdaArn = $"arn:aws:lambda:{context.Region}:432418664414:function:PRE-SemanticSegmentation",
+                            TaskAvailabilityLifetimeInSeconds = 345600,
+                            TaskTimeLimitInSeconds = 300,
+                            //MaxConcurrentTaskCount = 1000,
+                            AnnotationConsolidationConfig = new AnnotationConsolidationConfig
+                            {
+                                AnnotationConsolidationLambdaArn =
+                                    $"arn:aws:lambda:{context.Region}:432418664414:function:ACS-SemanticSegmentation"
+                            },
+                            NumberOfHumanWorkersPerDataObject = 1,
+                            TaskTitle = "Semantic segmentation",
+                            TaskDescription = $"Draw a polygon on objects.",
+                            WorkteamArn = context.WorkteamArn,
+                            UiConfig = new UiConfig
+                            {
+                                UiTemplateS3Uri = context.UiTemplateLocation
+                            }
+
+                        },
+                        InputConfig = new LabelingJobInputConfig
+                        {
+                            DataSource = new LabelingJobDataSource
+                            {
+                                S3DataSource = new LabelingJobS3DataSource
