@@ -225,3 +225,34 @@ namespace ModelBuilder.StateMachines
 
 
         public sealed class CheckIfJobComplete : ChoiceState<ExtractPolygons>
+        {
+            public override List<Choice> Choices => new List<Choice>
+            {
+                new Choice<WaitBeforeCheckingLabelingJobStatus, Context>(c => c.LabelingJobPercentComplete < 100)
+            };
+        }
+
+        public sealed class WaitBeforeCheckingLabelingJobStatus : WaitState<GetLabelingJobStatus>
+        {
+            public override int Seconds => 60;
+        }
+
+        [DotStep.Core.Action(ActionName = "*")]
+        public sealed class GetLabelingJobStatus : TaskState<Context, CheckIfJobComplete>
+        {
+            readonly IAmazonSageMaker sageMaker = new AmazonSageMakerClient();
+            public override async Task<Context> Execute(Context context)
+            {
+
+                var result = await sageMaker.DescribeLabelingJobAsync(
+                    new DescribeLabelingJobRequest
+                    {
+                        LabelingJobName = context.SceneProvisioningJobId
+                    });
+
+                switch (result.LabelingJobStatus)
+                {
+                    case "InProgress":
+                        context.LabelingJobPercentComplete = 50;
+                        break;
+                    case "Completed":
