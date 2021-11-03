@@ -279,3 +279,42 @@ namespace ModelBuilder.StateMachines
 
                 //var resp = await sageMaker.DescribeLabelingJobAsync(new DescribeLabelingJobRequest
                // {
+                //    LabelingJobName = "TestSegment"
+                //});
+
+                var labels = context.ClassNames.Select(className => new {label = className});
+                
+
+                var labelBody = "{\"document-version\":\"2018-11-28\",\"labels\": " + JsonConvert.SerializeObject(labels) + "}";
+                var labelLocation = $"{context.SceneProvisioningJobWorkspace}SegmentationLabels.json";
+
+                await s3.PutObjectAsync(new PutObjectRequest
+                {
+                    BucketName = labelLocation.S3Bucket(),
+                    Key = labelLocation.S3Key(),
+                    ContentType = "application/json",
+                    ContentBody = labelBody
+                });
+
+                //try
+                //{
+                    await sageMaker.CreateLabelingJobAsync(new CreateLabelingJobRequest
+                    {
+                        Tags = new AutoConstructedList<Tag>
+                        {
+                            new Tag
+                            {
+                                Key = "SceneProvisioningJobId",
+                                Value = context.SceneProvisioningJobId
+                            }
+                        },
+                        LabelingJobName = $"{context.SceneProvisioningJobId}",
+                        LabelAttributeName = "Polygon-ref",
+                        LabelCategoryConfigS3Uri = labelLocation,
+                        StoppingConditions = new LabelingJobStoppingConditions
+                        {
+                            MaxPercentageOfInputDatasetLabeled = 100
+                        },
+                        RoleArn = context.LabelingRoleArn,
+                        
+                        HumanTaskConfig = new HumanTaskConfig
