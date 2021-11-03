@@ -375,3 +375,41 @@ namespace ModelBuilder.StateMachines
                 return context;
             }
         }
+
+        [DotStep.Core.Action(ActionName = "*")]
+        [FunctionMemory(Memory = 3008)]
+        [FunctionTimeout(Timeout = 900)]
+        public sealed class ExtractPolygons : TaskState<Context, CheckIfBackgroundSceneExists>
+        {
+            readonly IAmazonS3 s3 = new AmazonS3Client();
+            readonly IAmazonSQS sqs = new AmazonSQSClient();
+
+            private readonly List<Task<ListObjectsResponse>> listTasks = new List<Task<ListObjectsResponse>>();
+        
+            
+            public override async Task<Context> Execute(Context context)
+            {
+                var pngPath = $"{context.SceneProvisioningJobWorkspace.S3Key()}output/{context.SceneProvisioningJobId}/annotations/consolidated-annotation/output/";
+                var jsonPath = $"{context.SceneProvisioningJobWorkspace.S3Key()}output/{context.SceneProvisioningJobId}/annotations/consolidated-annotation/consolidation-request/iteration-1/";
+               
+
+                listTasks.Add(s3.ListObjectsAsync(new ListObjectsRequest
+                {
+                    BucketName = context.SceneProvisioningJobWorkspace.S3Bucket(),
+                    Prefix = pngPath
+                }));
+                listTasks.Add(s3.ListObjectsAsync(new ListObjectsRequest
+                {
+                    BucketName = context.SceneProvisioningJobWorkspace.S3Bucket(),
+                    Prefix = jsonPath
+                }));
+
+                await Task.WhenAll(listTasks);
+
+                var pngObject = listTasks[0].Result.S3Objects.Single();
+                var jsonObject = listTasks[1].Result.S3Objects.Single();
+                
+                var pngResp = await s3.GetObjectAsync(new GetObjectRequest
+                {
+                    Key = pngObject.Key,
+                    BucketName = context.SceneProvisioningJobWorkspace.S3Bucket(),
