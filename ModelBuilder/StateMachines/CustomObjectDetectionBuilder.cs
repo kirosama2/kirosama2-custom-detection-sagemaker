@@ -413,3 +413,31 @@ namespace ModelBuilder.StateMachines
                 {
                     Key = pngObject.Key,
                     BucketName = context.SceneProvisioningJobWorkspace.S3Bucket(),
+                });
+                var jpgResp = await s3.GetObjectAsync(new GetObjectRequest
+                {
+                    BucketName = context.SceneImageLocation.S3Bucket(),
+                    Key = context.SceneImageLocation.S3Key()
+                });
+                var jsonResp = await s3.GetObjectAsync(new GetObjectRequest
+                {
+                    BucketName = context.SceneProvisioningJobWorkspace.S3Bucket(),
+                    Key = jsonObject.Key
+                });
+
+                var png = Image.Load(pngResp.ResponseStream, new PngDecoder());
+                var image = Image.Load(jpgResp.ResponseStream);
+
+                if (context.GenerateSceneBackground)
+                {
+                    Console.WriteLine("Making full mask PNG.");
+                    var fullMask = new Image<Rgba32>(png.Width, png.Height);
+                    for (var x = 0; x < png.Width; x++)
+                    {
+                        for (var y = 0; y < png.Height; y++)
+                        {
+                            var pixel = png.Frames[0][x, y];
+                            if (!(pixel.R == 255 &&
+                                  pixel.G == 255 &&
+                                  pixel.B == 255 &&
+                                  pixel.R == 255))
