@@ -441,3 +441,33 @@ namespace ModelBuilder.StateMachines
                                   pixel.G == 255 &&
                                   pixel.B == 255 &&
                                   pixel.R == 255))
+                            {
+                                var x1 = x;
+                                var y1 = y;
+                                var pixelToCopy = image.Clone(i => i.Crop(new Rectangle(x1, y1, 1, 1)));
+
+                                fullMask.Mutate(m => m.DrawImage(pixelToCopy, 1, new Point(x1, y1)));
+                            }
+                        }
+                    }
+
+                    using (var stream = new MemoryStream())
+                    {
+                        fullMask.Save(stream, new PngEncoder());
+                        await s3.PutObjectAsync(new PutObjectRequest
+                        {
+                            BucketName = context.SceneProvisioningJobWorkspace.S3Bucket(),
+                            Key = $"{context.SceneProvisioningJobWorkspace.S3Key()}full-mask.png",
+                            ContentType = "image/png",
+                            InputStream = stream
+                        });
+                    }
+
+                    context.BackgroundImagePercentComplete = 10;
+                    context.SceneBackgroundLocation = context.SceneProvisioningJobWorkspace + "scene-background.jpg";
+
+                    await sqs.SendMessageAsync(new SendMessageRequest
+                    {
+                        QueueUrl = context.SceneBackgroundGenerationQueueUrl,
+                        MessageBody = JsonConvert.SerializeObject(context)
+                    });
