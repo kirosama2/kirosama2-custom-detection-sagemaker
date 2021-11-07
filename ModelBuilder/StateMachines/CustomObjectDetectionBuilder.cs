@@ -471,3 +471,43 @@ namespace ModelBuilder.StateMachines
                         QueueUrl = context.SceneBackgroundGenerationQueueUrl,
                         MessageBody = JsonConvert.SerializeObject(context)
                     });
+                }
+
+                var colorMappings = new Dictionary<string, Rgba32>();
+                using (var sr = new StreamReader(jsonResp.ResponseStream))
+                {
+                    var json = await sr.ReadToEndAsync();
+                    var segmentConfig = JsonConvert.DeserializeObject<dynamic>(json);
+                    var content = segmentConfig[0].annotations[0].annotationData.content;
+                    var contentObj = JsonConvert.DeserializeObject<dynamic>(content.Value);
+                    foreach (var mapping in contentObj["crowd-semantic-segmentation"].labelMappings)
+                    {
+                        string className = mapping.Name;
+                        string hexColor = mapping.Value.color.Value.Replace("#", string.Empty);
+                        var r = int.Parse(hexColor.Substring(0, 2), System.Globalization.NumberStyles.HexNumber);
+                        var g = int.Parse(hexColor.Substring(2, 2), System.Globalization.NumberStyles.HexNumber);
+                        var b = int.Parse(hexColor.Substring(4, 2), System.Globalization.NumberStyles.HexNumber);
+                        var color = new Rgba32
+                        {
+                            R = Convert.ToByte(r),
+                            G = Convert.ToByte(g),
+                            B = Convert.ToByte(b),
+                            A = Convert.ToByte(1)
+                        };
+                        colorMappings.Add(className, color);
+                    }
+                }
+
+                var classObjectLocationBuilder = new StringBuilder();
+                classObjectLocationBuilder.AppendLine("class,x,y,width,height");
+
+                foreach (var colorMapping in colorMappings)
+                {
+                    var file = new Image<Rgba32>(png.Width, png.Height);
+                    int maxY = 0;
+                    int minX = 1000000;
+                    int minY = 1000000;
+                    int maxX = 0;
+                    for (var x = 0; x < png.Width; x++)
+                    {
+                        for (var y = 0; y < png.Height; y++)
