@@ -511,3 +511,30 @@ namespace ModelBuilder.StateMachines
                     for (var x = 0; x < png.Width; x++)
                     {
                         for (var y = 0; y < png.Height; y++)
+                        {
+                            var pixel = png.Frames[0][x, y];
+                            if (pixel.R == colorMapping.Value.R && 
+                                pixel.G == colorMapping.Value.G && 
+                                pixel.B == colorMapping.Value.B)
+                            {
+                                var x1 = x;
+                                var y1 = y;
+                                if (y > maxY)
+                                    maxY = y;
+                                if (x > maxX)
+                                    maxX = x;
+                                if (x < minX)
+                                    minX = x;
+                                if (y < minY)
+                                    minY = y;
+                                var pixelToCopy = image.Clone(i => i.Crop(new Rectangle(x1, y1, 1, 1)));
+                                file.Mutate(m => m.DrawImage(pixelToCopy, 1, new Point(x1, y1)));
+                            }
+                        }
+                    }
+                    var width = maxX - minX;
+                    var height = maxY - minY;
+                    file.Mutate(c => c.Crop(new Rectangle(minX, minY, width, height)));
+                    //file.Save($"{colorMapping.Key}.png");
+
+                    classObjectLocationBuilder.AppendLine($"{colorMapping.Key},{minX},{minY},{width},{height}");
