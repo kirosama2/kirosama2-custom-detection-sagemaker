@@ -538,3 +538,31 @@ namespace ModelBuilder.StateMachines
                     //file.Save($"{colorMapping.Key}.png");
 
                     classObjectLocationBuilder.AppendLine($"{colorMapping.Key},{minX},{minY},{width},{height}");
+
+                    using (var stream = new MemoryStream())
+                    {
+                        file.Save(stream, new PngEncoder());
+                        await s3.PutObjectAsync(new PutObjectRequest
+                        {
+                            BucketName = context.SceneProvisioningJobWorkspace.S3Bucket(),
+                            Key = $"{context.SceneProvisioningJobWorkspace.S3Key()}objects/{colorMapping.Key}.png",
+                            ContentType = "image/png",
+                            InputStream = stream
+                        });
+                    }
+
+                    file.Dispose();
+                }
+
+                image.Dispose();
+                png.Dispose();
+
+                await s3.PutObjectAsync(new PutObjectRequest
+                {
+                    BucketName = context.SceneProvisioningJobWorkspace.S3Bucket(),
+                    Key = $"{context.SceneProvisioningJobWorkspace.S3Key()}object-locations.csv",
+                    ContentType = "text/csv",
+                    ContentBody = classObjectLocationBuilder.ToString()
+                });
+
+                return context;
