@@ -654,3 +654,33 @@ namespace ModelBuilder.StateMachines
         [DotStep.Core.Action(ActionName = "*")]
         public sealed class GetEndpointStatus : TaskState<Context, CheckEndpointStatus>
         {
+            IAmazonSageMaker sageMaker = new AmazonSageMakerClient();
+            public override async Task<Context> Execute(Context context)
+            {
+
+                var result = await sageMaker.DescribeEndpointAsync(new DescribeEndpointRequest
+                {
+                    EndpointName = context.SceneCode
+                });
+
+                switch (result.EndpointStatus.Value)
+                {
+                    case "Creating":
+                        context.EndpointPercentComplete = 20;
+                        break;
+                    case "InService":
+                        context.EndpointPercentComplete = 100;
+                        break;
+                    default:
+                        throw new Exception($"Unsupported endpoint status: {result.EndpointStatus.Value}");
+                }
+                
+                return context;
+            }
+        }
+
+        public sealed class CheckEndpointStatus : ChoiceState<CreateDashboard>
+        {
+            public override List<Choice> Choices => new List<Choice>
+            {
+                new Choice<WaitForEndpoint, Context>(c => c.EndpointPercentComplete < 100)
