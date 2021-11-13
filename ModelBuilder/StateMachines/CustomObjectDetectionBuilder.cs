@@ -609,3 +609,28 @@ namespace ModelBuilder.StateMachines
                 
                 return context;
             }
+        }
+
+
+        public sealed class CheckTrainingJobStatus : ChoiceState<CreateOrUpdateEndpoint>
+        {
+            public override List<Choice> Choices => new List<Choice>
+            {
+                new Choice<WaitForTrainingJob, Context>(c => c.TrainingJobPercentComplete < 100)
+            };
+        }
+
+        public sealed class WaitForTrainingJob : WaitState<GetTrainingJobStatus>
+        {
+            public override int Seconds => 240;
+        }
+
+        [DotStep.Core.Action(ActionName = "*")]
+        public sealed class GetTrainingJobStatus : TaskState<Context, CheckTrainingJobStatus>
+        {
+            IAmazonSageMaker sageMaker = new AmazonSageMakerClient();
+            public override async Task<Context> Execute(Context context)
+            {
+                var result = await sageMaker.DescribeTrainingJobAsync(new DescribeTrainingJobRequest
+                {
+                    TrainingJobName = context.SceneCode + "-" + context.SceneProvisioningJobId
