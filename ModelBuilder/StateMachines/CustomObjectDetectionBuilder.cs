@@ -745,3 +745,33 @@ namespace ModelBuilder.StateMachines
                     },
                     OutputDataConfig = new OutputDataConfig
                     {
+                        S3OutputPath = context.SceneProvisioningJobWorkspace + "object-detection/"
+                    },
+                    TrainingJobName = $"{context.SceneCode}-{context.SceneProvisioningJobId}",
+                    AlgorithmSpecification = new AlgorithmSpecification
+                    {
+                        TrainingInputMode = new TrainingInputMode("File"),
+                        TrainingImage = "811284229777.dkr.ecr.us-east-1.amazonaws.com/object-detection:latest"
+                    },
+                    InputDataConfig = new List<Channel>
+                    {
+                        new Channel
+                        {
+                            ChannelName = "train",
+                            ContentType = "application/x-image",
+                            InputMode = TrainingInputMode.File,
+                            DataSource = new DataSource
+                            {
+                                S3DataSource = new S3DataSource
+                                {
+                                    S3DataDistributionType = S3DataDistribution.FullyReplicated,
+                                    S3DataType = new S3DataType("S3Prefix"),
+                                    S3Uri = $"{context.SceneProvisioningJobWorkspace}object-detection/train/images"
+                                }
+                            }
+                        },
+                        new Channel
+                        {
+                            ChannelName = "validation",
+                            ContentType = "application/x-image",
+                            InputMode = TrainingInputMode.File,
