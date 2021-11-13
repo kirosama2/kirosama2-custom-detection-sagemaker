@@ -717,3 +717,31 @@ namespace ModelBuilder.StateMachines
                     HyperParameters = new Dictionary<string, string>
                     {
                         {"base_network", "vgg-16" },
+                        {"epochs", "40" },
+                        {"image_shape", "300" },
+                        {"label_width", "350" },
+                        {"learning_rate", "0.001" },
+                        {"lr_scheduler_factor", "0.1" },
+                        {"mini_batch_size", "32" },
+                        {"momentum", "0.9" },
+                        {"nms_threshold", "0.45" },
+                        {"num_classes", Convert.ToString(context.ClassNames.Count) },
+                        {"num_training_samples", Convert.ToString(context.NumberOfTrainingSamples) },
+                        {"optimizer", "sgd" },
+                        {"overlap_threshold", "0.5" },
+                        {"use_pretrained_model", "1" },
+                        {"weight_decay", "0.0005" }
+                    },
+                    ResourceConfig = new ResourceConfig
+                    {
+                        InstanceCount = 1,
+                        InstanceType = TrainingInstanceType.MlP32xlarge,
+                        VolumeSizeInGB = 256
+                    },
+                    RoleArn = context.LabelingRoleArn,
+                    StoppingCondition = new StoppingCondition
+                    {
+                        MaxRuntimeInSeconds = Convert.ToInt32(TimeSpan.FromHours(8).TotalSeconds)
+                    },
+                    OutputDataConfig = new OutputDataConfig
+                    {
