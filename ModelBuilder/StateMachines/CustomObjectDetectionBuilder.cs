@@ -566,3 +566,46 @@ namespace ModelBuilder.StateMachines
                 });
 
                 return context;
+            }
+        }
+
+        public sealed class CheckIfBackgroundSceneExists : ChoiceState<MakeTrainingImages>
+        {
+            public override List<Choice> Choices => new List<Choice>
+            {
+                new Choice<WaitBeforeCheckingBackgroundJobExistence, Context>(c => c.BackgroundImagePercentComplete < 100)
+            };
+        }
+
+        public sealed class WaitBeforeCheckingBackgroundJobExistence : WaitState<GetBackgroundImage>
+        {
+            public override int Seconds => 60;
+        }
+
+        [DotStep.Core.Action(ActionName = "*")]
+        public sealed class GetBackgroundImage : TaskState<Context, CheckIfBackgroundSceneExists>
+        {
+            IAmazonS3 s3 = new AmazonS3Client();
+
+            public override async Task<Context> Execute(Context context)
+            {
+                try
+                {
+                    await s3.GetObjectAsync(new GetObjectRequest
+                    {
+                        BucketName = context.SceneBackgroundLocation.S3Bucket(),
+                        Key = context.SceneBackgroundLocation.S3Key()
+                    });
+
+                    // if we make it this far the image exists.
+                    context.BackgroundImagePercentComplete = 100;
+                }
+                catch (AmazonS3Exception s3Exception)
+                {
+                    if (s3Exception.ErrorCode == "NoSuchKey")
+                        context.BackgroundImagePercentComplete = 20;
+                    else throw;
+                }
+                
+                return context;
+            }
