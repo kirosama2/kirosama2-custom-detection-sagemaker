@@ -775,3 +775,30 @@ namespace ModelBuilder.StateMachines
                             ChannelName = "validation",
                             ContentType = "application/x-image",
                             InputMode = TrainingInputMode.File,
+                            DataSource = new DataSource
+                            {
+                                S3DataSource = new S3DataSource
+                                {
+                                    S3DataDistributionType = S3DataDistribution.FullyReplicated,
+                                    S3DataType = new S3DataType("S3Prefix"),
+                                    S3Uri = $"{context.SceneProvisioningJobWorkspace}object-detection/validation/images"
+                                }
+                            }
+                        },
+                        new Channel
+                        {
+                            ChannelName = "train_annotation",
+                            ContentType = "application/x-image",
+                            InputMode = TrainingInputMode.File,
+                            DataSource = new DataSource
+                            {
+                                S3DataSource = new S3DataSource
+                                {
+                                    S3DataDistributionType = S3DataDistribution.FullyReplicated,
+                                    S3DataType = new S3DataType("S3Prefix"),
+                                    S3Uri = $"{context.SceneProvisioningJobWorkspace}object-detection/train/annotations"
+                                }
+                            }
+                        },
+                        new Channel
+                        {
