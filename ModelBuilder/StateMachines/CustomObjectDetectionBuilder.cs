@@ -634,3 +634,23 @@ namespace ModelBuilder.StateMachines
                 var result = await sageMaker.DescribeTrainingJobAsync(new DescribeTrainingJobRequest
                 {
                     TrainingJobName = context.SceneCode + "-" + context.SceneProvisioningJobId
+                });
+                switch (result.TrainingJobStatus.Value)
+                {
+                    case "InProgress":
+                        context.TrainingJobPercentComplete = 20;
+                        break;
+                    case "Completed":
+                        context.TrainingJobPercentComplete = 100;
+                        break;
+                    default:
+                        throw new Exception($"Unsupported training status: {result.TrainingJobStatus.Value}");
+                }
+
+                return context;
+            }
+        }
+
+        [DotStep.Core.Action(ActionName = "*")]
+        public sealed class GetEndpointStatus : TaskState<Context, CheckEndpointStatus>
+        {
