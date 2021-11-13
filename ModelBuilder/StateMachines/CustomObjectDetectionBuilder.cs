@@ -684,3 +684,36 @@ namespace ModelBuilder.StateMachines
             public override List<Choice> Choices => new List<Choice>
             {
                 new Choice<WaitForEndpoint, Context>(c => c.EndpointPercentComplete < 100)
+            };
+        }
+
+        public sealed class WaitForEndpoint : WaitState<GetEndpointStatus>
+        {
+            public override int Seconds => 240;
+        }
+
+        [DotStep.Core.Action(ActionName = "*")]
+        public sealed class CreateTrainingJob : TaskState<Context, CheckTrainingJobStatus>
+        {
+            IAmazonSageMaker sageMaker = new AmazonSageMakerClient();
+
+            public override async Task<Context> Execute(Context context)
+            {
+                var result = await sageMaker.CreateTrainingJobAsync(new CreateTrainingJobRequest
+                {
+                    Tags = new AutoConstructedList<Tag>
+                    {
+                        new Tag
+                        {
+                            Key = "SceneCode",
+                            Value = context.SceneCode
+                        },
+                        new Tag
+                        {
+                            Key = "SceneProvisioningJobId",
+                            Value = context.SceneProvisioningJobId
+                        }
+                    },
+                    HyperParameters = new Dictionary<string, string>
+                    {
+                        {"base_network", "vgg-16" },
