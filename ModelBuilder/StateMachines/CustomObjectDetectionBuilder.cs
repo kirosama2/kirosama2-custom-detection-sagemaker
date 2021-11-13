@@ -802,3 +802,36 @@ namespace ModelBuilder.StateMachines
                         },
                         new Channel
                         {
+                            ChannelName = "validation_annotation",
+                            ContentType = "application/x-image",
+                            InputMode = TrainingInputMode.File,
+                            DataSource = new DataSource
+                            {
+                                S3DataSource = new S3DataSource
+                                {
+                                    S3DataDistributionType = S3DataDistribution.FullyReplicated,
+                                    S3DataType = new S3DataType("S3Prefix"),
+                                    S3Uri = $"{context.SceneProvisioningJobWorkspace}object-detection/validation/annotations"
+                                }
+                            }
+                        },
+                    }
+                });
+                return context;
+            }
+        }
+
+        [DotStep.Core.Action(ActionName = "*")]
+        [FunctionMemory(Memory = 1024)]
+        [FunctionTimeout(Timeout = 900)]
+        public sealed class MakeTrainingImages : TaskState<Context, CreateTrainingJob>
+        {
+            class Location
+            {
+                public int x { get; set; }
+                public int y { get; set; }
+                public int w { get; set; }
+                public int h { get; set; }
+            }
+
+            IAmazonS3 s3 = new AmazonS3Client();
