@@ -835,3 +835,37 @@ namespace ModelBuilder.StateMachines
             }
 
             IAmazonS3 s3 = new AmazonS3Client();
+
+            private async Task BuildObjectDetectionData(Context context, Image<Rgba32> backgroundScene, string objectLocationsCsv)
+            {
+
+                var pngs = new List<Image<Rgba32>>();
+
+                var locations = new Dictionary<string, Location>();
+
+                var random = new Random();
+                
+                foreach (var className in context.ClassNames)
+                {
+                    var getResult = await s3.GetObjectAsync(context.SceneProvisioningJobWorkspace.S3Bucket(),
+                        $"{context.SceneProvisioningJobWorkspace.S3Key()}objects/{className}.png");
+
+                    var png = Image.Load(getResult.ResponseStream, new PngDecoder());
+
+                    pngs.Add(png);
+
+                    var location = new Location();
+
+                    foreach (var row in objectLocationsCsv.Split('\n'))
+                        if (row.Split(',')[0] == className)
+                        {
+                            location.x = Convert.ToInt32(row.Split(',')[1]);
+                            location.y = Convert.ToInt32(row.Split(',')[2]);
+                            location.w = Convert.ToInt32(row.Split(',')[3]);
+                            location.h = Convert.ToInt32(row.Split(',')[4]);
+                        }
+
+                    locations.Add(className, location);
+
+
+                    //background.Mutate(b => b.DrawImage(png, 1, new Point(x, y)));
