@@ -869,3 +869,42 @@ namespace ModelBuilder.StateMachines
 
 
                     //background.Mutate(b => b.DrawImage(png, 1, new Point(x, y)));
+                }
+
+                var xVar = Convert.ToInt32(0.02m * backgroundScene.Width);
+                var yVar = Convert.ToInt32(0.02m * backgroundScene.Height);
+
+                var putTasks = new List<Task<PutObjectResponse>>();
+                for (int i = 0; i < 200; i++)
+                {
+
+                    var background = backgroundScene.Clone();
+                    var channel = random.Next(0, 9) < 2 ? "validation" : "train";
+
+                    var b = new StringBuilder();
+                    b.AppendLine("{\"file\":\"" + i + ".jpg\", \"image_size\": [{ \"width\": " +
+                                 background.Width + ", \"height\": " + background.Height +
+                                 ", \"depth\": 3 }], \"annotations\": [");
+
+                    var classIndex = 0;
+                    foreach (var className in context.ClassNames)
+                    {
+                        var l = locations[className];
+
+                        var randomX = random.Next(-1 * xVar, xVar) + l.x;
+                        var randomY = random.Next(-1 * yVar, yVar) + l.y;
+
+                        if (randomX < 0)
+                            randomX = 0;
+                        if (randomY < 0)
+                            randomY = 0;
+                        
+
+                        b.AppendLine("{\"class_id\": " + classIndex + ", \"left\": " + randomX + ", \"top\": " + randomY +
+                                     ", \"width\": " + l.w + ", \"height\": " + l.h + "}");
+
+                        if (classIndex < context.ClassNames.Count - 1)
+                            b.Append(",");
+                        
+                        var ci = classIndex;
+                        background.Mutate(bg => bg.DrawImage(pngs[ci], 1, new Point(randomX, randomY)));
