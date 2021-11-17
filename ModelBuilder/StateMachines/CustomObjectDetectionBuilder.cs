@@ -908,3 +908,37 @@ namespace ModelBuilder.StateMachines
                         
                         var ci = classIndex;
                         background.Mutate(bg => bg.DrawImage(pngs[ci], 1, new Point(randomX, randomY)));
+
+                        classIndex++;
+                    }
+                    b.AppendLine("]}");
+                    
+
+                    var json = b.ToString();
+                    var deserializeObject = JsonConvert.DeserializeObject(json);
+                    var formattedJson = JsonConvert.SerializeObject(deserializeObject, Formatting.Indented);
+                    
+                    putTasks.Add(s3.PutObjectAsync(
+                        new PutObjectRequest
+                        {
+                            BucketName = context.SceneProvisioningJobWorkspace.S3Bucket(),
+                            Key =
+                                $"{context.SceneProvisioningJobWorkspace.S3Key()}object-detection/{channel}/annotations/{i}.json",
+                            ContentType = "application/json",
+                            ContentBody = formattedJson
+                        }));
+
+                    using (var stream = new MemoryStream())
+                    {
+                        background.Save(stream, new JpegEncoder());
+                        await s3.PutObjectAsync(
+                            new PutObjectRequest
+                            {
+                                BucketName = context.SceneProvisioningJobWorkspace.S3Bucket(),
+                                Key = $"{context.SceneProvisioningJobWorkspace.S3Key()}object-detection/{channel}/images/{i}.jpg",
+                                ContentType = "image/jpg",
+                                InputStream = stream
+                            });
+                    }
+
+                }
