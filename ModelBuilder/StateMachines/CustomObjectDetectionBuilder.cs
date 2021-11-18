@@ -987,3 +987,34 @@ namespace ModelBuilder.StateMachines
                         $"{context.SceneProvisioningJobWorkspace.S3Key()}objects/{className}.png");
 
                     var png = Image.Load(getResult.ResponseStream, new PngDecoder());
+
+                    var maxLength = (new List<int> {png.Width, png.Height}).Max();
+
+                    var xPadding = x / 20;
+                    var yPadding = y / 20;
+
+                    var outerX = x - xPadding;
+                    var outerY = y - yPadding;
+                    var width = png.Width + xPadding * 2;
+                    var height = png.Height + yPadding * 2;
+
+
+                    var random = new Random();
+
+                    var classBackground = background
+                        .Clone(img => img.Crop(new Rectangle(
+                            outerX,
+                            outerY,
+                            width,
+                           height)));
+
+                    var trainingBackground = classBackground.Clone(i => i.Resize(122, 122));
+                    
+                    using (var stream = new MemoryStream())
+                    {
+                        trainingBackground.Save(stream, new JpegEncoder());
+                        await s3.PutObjectAsync(
+                            new PutObjectRequest
+                            {
+                                BucketName = context.SceneProvisioningJobWorkspace.S3Bucket(),
+                                Key = $"{context.SceneProvisioningJobWorkspace.S3Key()}image-classification/train/{className}Background/0.jpg",
