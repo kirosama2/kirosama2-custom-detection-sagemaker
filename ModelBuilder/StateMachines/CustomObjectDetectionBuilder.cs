@@ -942,3 +942,48 @@ namespace ModelBuilder.StateMachines
                     }
 
                 }
+
+                await Task.WhenAll(putTasks);
+
+            }
+
+            public override async Task<Context> Execute(Context context)
+            {
+                var backgroundResult = await s3.GetObjectAsync(context.SceneBackgroundLocation.S3Bucket(),
+                    context.SceneBackgroundLocation.S3Key());
+                var objectLocations = await s3.GetObjectAsync(context.SceneProvisioningJobWorkspace.S3Bucket(),
+                    context.SceneProvisioningJobWorkspace.S3Key() + "object-locations.csv");
+
+                var background = Image.Load(backgroundResult.ResponseStream, new JpegDecoder());
+                string objectLocationsCsv;
+
+                using (var sr = new StreamReader(objectLocations.ResponseStream))
+                  objectLocationsCsv = sr.ReadToEnd();
+
+                var objectDetectionTask = BuildObjectDetectionData(context, background, objectLocationsCsv);
+
+
+                var trainList = new StringBuilder();
+                var validationList = new StringBuilder();
+
+                var itemIndex = 0;
+                var classIndex = 0;
+                foreach (var className in context.ClassNames)
+                {
+                    Console.WriteLine($"Processing class {className}");
+
+                    int x = 0;
+                    int y = 0;
+                    
+                    foreach (var row in objectLocationsCsv.Split('\n'))
+                        if (row.Split(',')[0] == className)
+                        {
+                            x = Convert.ToInt32(row.Split(',')[1]);
+                            y = Convert.ToInt32(row.Split(',')[2]);
+                        }
+
+                    
+                    var getResult = await s3.GetObjectAsync(context.SceneProvisioningJobWorkspace.S3Bucket(),
+                        $"{context.SceneProvisioningJobWorkspace.S3Key()}objects/{className}.png");
+
+                    var png = Image.Load(getResult.ResponseStream, new PngDecoder());
