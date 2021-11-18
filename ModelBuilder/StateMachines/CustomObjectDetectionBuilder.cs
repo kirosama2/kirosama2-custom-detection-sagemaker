@@ -1018,3 +1018,38 @@ namespace ModelBuilder.StateMachines
                             {
                                 BucketName = context.SceneProvisioningJobWorkspace.S3Bucket(),
                                 Key = $"{context.SceneProvisioningJobWorkspace.S3Key()}image-classification/train/{className}Background/0.jpg",
+                                ContentType = "image/jpg",
+                                InputStream = stream
+                            });
+                    }
+                    using (var stream = new MemoryStream())
+                    {
+                        trainingBackground.Save(stream, new JpegEncoder());
+                        await s3.PutObjectAsync(
+                            new PutObjectRequest
+                            {
+                                BucketName = context.SceneProvisioningJobWorkspace.S3Bucket(),
+                                Key = $"{context.SceneProvisioningJobWorkspace.S3Key()}image-classification/validation/{className}Background/0.jpg",
+                                ContentType = "image/jpg",
+                                InputStream = stream
+                            });
+                    }
+
+                    for (int i = 0; i < context.ImagesGeneratedPerClass; i++)
+                    {
+                        var drawX = random.Next(0, width / 2);
+                        var drawY = random.Next(0, height / 2);
+
+                        var trainingImage = classBackground
+                            .Clone(img => img.DrawImage(png, 1, new Point(drawX, drawY)));
+
+                        trainingImage.Mutate(img => img.Resize(122, 122));
+
+                        //trainingImage.Save($"classes-{className}-{i}.jpg", new JpegEncoder());
+
+                        var channel = random.Next(0, 9) < 2 ? "validation" : "train";
+
+
+                        using (var stream = new MemoryStream())
+                        {
+                            trainingImage.Save(stream, new JpegEncoder());
