@@ -1075,3 +1075,49 @@ namespace ModelBuilder.StateMachines
                             context.NumberOfTrainingSamples++;
                         }
                         else
+                            validationList.AppendLine(line);
+
+                        itemIndex++;
+                    }
+                    //context.NumberOfTrainingSamples++; // note: +1 for the background training class image we added.
+                    //trainList.AppendLine($"{10000 + classIndex + itemIndex}\t{classIndex + context.ClassNames.Count}\t{className}Background/0.jpg");
+                    //validationList.AppendLine($"{10000 + classIndex + itemIndex}\t{classIndex + context.ClassNames.Count}\t{className}Background/0.jpg");
+                    classIndex++;
+                }
+
+                
+
+                await s3.PutObjectAsync(
+                    new PutObjectRequest
+                    {
+                        BucketName = context.SceneProvisioningJobWorkspace.S3Bucket(),
+                        Key = $"{context.SceneProvisioningJobWorkspace.S3Key()}image-classification/train.lst",
+                        ContentType = "text/tsv",
+                        ContentBody = trainList.ToString()
+                    });
+                await s3.PutObjectAsync(
+                    new PutObjectRequest
+                    {
+                        BucketName = context.SceneProvisioningJobWorkspace.S3Bucket(),
+                        Key = $"{context.SceneProvisioningJobWorkspace.S3Key()}image-classification/validation.lst",
+                        ContentType = "text/tsv",
+                        ContentBody = validationList.ToString()
+                    });
+
+                await Task.WhenAll(objectDetectionTask);
+
+                return context;
+            }
+
+      
+        }
+
+        [DotStep.Core.Action(ActionName = "*")]
+        public sealed class CreateDashboard : TaskState<Context, Done>
+        {
+            IAmazonCloudWatch cloudWatch = new AmazonCloudWatchClient();
+            public override async Task<Context> Execute(Context context)
+            {
+                var dashboard = new Dashboard
+                {
+                    Widgets = new List<Widget>
