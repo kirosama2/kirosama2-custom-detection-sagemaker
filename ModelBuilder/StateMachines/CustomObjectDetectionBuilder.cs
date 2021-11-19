@@ -1053,3 +1053,25 @@ namespace ModelBuilder.StateMachines
                         using (var stream = new MemoryStream())
                         {
                             trainingImage.Save(stream, new JpegEncoder());
+                            await s3.PutObjectAsync(
+                                new PutObjectRequest
+                                {
+                                    BucketName = context.SceneProvisioningJobWorkspace.S3Bucket(),
+                                    Key = $"{context.SceneProvisioningJobWorkspace.S3Key()}image-classification/{channel}/{className}/{i}.jpg",
+                                    ContentType = "image/jpg",
+                                    InputStream = stream
+                                });
+                        }
+
+                        var line = $"{itemIndex}\t{classIndex}\t{className}/{i}.jpg";
+                        var backgroundLine = $"{itemIndex + 10000}\t{classIndex + context.ClassNames.Count}\t{className}Background/0.jpg";
+
+                        if (channel == "train")
+                        {
+                            trainList.AppendLine(line);
+                            context.NumberOfTrainingSamples++;
+
+                            trainList.AppendLine(backgroundLine);
+                            context.NumberOfTrainingSamples++;
+                        }
+                        else
