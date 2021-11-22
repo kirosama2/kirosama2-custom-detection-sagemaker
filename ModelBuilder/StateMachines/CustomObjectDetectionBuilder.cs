@@ -1121,3 +1121,33 @@ namespace ModelBuilder.StateMachines
                 var dashboard = new Dashboard
                 {
                     Widgets = new List<Widget>
+                    {
+                        new Widget
+                        {
+                            Type = "metric",
+                            X = 0,
+                            Y = 0,
+                            Width = 24,
+                            Height = 9,
+                            Properties = new Properties
+                            {
+                               Metrics = new AutoConstructedList<List<string>>(),
+                                View = "timeSeries",
+                                Stacked = false,
+                                Region = context.Region,
+                                Stat = "Maximum",
+                                Period = 10,
+                                Title = context.SceneCode,
+                                YAxis = new Axis
+                                {
+                                    Left = new Left
+                                    {
+                                        Max = 100
+                                    }
+                                }
+                            }
+                        }
+                    }
+                };
+
+                dashboard.Widgets[0].Properties.Metrics.Add(new List<string>
