@@ -1151,3 +1151,41 @@ namespace ModelBuilder.StateMachines
                 };
 
                 dashboard.Widgets[0].Properties.Metrics.Add(new List<string>
+                {
+                    "Cameras", "Confidence", "CameraKey", context.CameraKey, "Label", "Person", "Source", "Rekognition"
+                });
+
+                foreach (var className in context.ClassNames)
+                {
+                    dashboard.Widgets[0].Properties.Metrics.Add(new List<string>
+                    {
+                        "Cameras", "Confidence", "CameraKey", context.CameraKey, "Label", className, "Source", context.SceneCode
+                    });
+                }
+                
+                var json = JsonConvert.SerializeObject(dashboard, Formatting.Indented);
+
+                var putResult = await cloudWatch.PutDashboardAsync(new PutDashboardRequest
+                {
+                    DashboardName = context.SceneCode,
+                    DashboardBody = json
+                });
+
+                return context;
+            }
+
+
+            public class Dashboard
+            {
+                [JsonProperty("widgets")] 
+                public List<Widget> Widgets { get; set; }
+            }
+
+            public class Widget
+            {
+                [JsonProperty("type")]
+                public string Type { get; set; }
+                [JsonProperty("x")]
+                public int X { get; set; }
+                [JsonProperty("y")]
+                public int Y { get; set; }
