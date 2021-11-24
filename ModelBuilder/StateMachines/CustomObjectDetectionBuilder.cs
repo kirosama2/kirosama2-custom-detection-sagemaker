@@ -1189,3 +1189,43 @@ namespace ModelBuilder.StateMachines
                 public int X { get; set; }
                 [JsonProperty("y")]
                 public int Y { get; set; }
+                [JsonProperty("width")]
+                public int Width { get; set; }
+                [JsonProperty("height")]
+                public int Height { get; set; }
+                [JsonProperty("properties")]
+                public Properties Properties { get; set; }
+            }
+
+            public class Properties
+            {
+                [JsonProperty("metrics")]
+                public List<List<string>> Metrics { get; set; }
+                [JsonProperty("view")]
+                public string View { get; set; }
+                [JsonProperty("stacked")]
+                public bool Stacked { get; set; }
+                [JsonProperty("region")]
+                public string Region { get; set; }
+                [JsonProperty("stat")]
+                public string Stat { get; set; }
+                [JsonProperty("period")]
+                public int Period { get; set; }
+                [JsonProperty("title")]
+                public string Title { get; set; }
+                [JsonProperty("yAxis")]
+                public Axis YAxis { get; set; }
+
+            }
+
+            public class Axis
+            {
+                [JsonProperty("left")]
+                public Left Left { get; set; }
+            }
+
+            public class Left
+            {
+                [JsonProperty("max")]
+                public int Max { get; set; }
+            }
