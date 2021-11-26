@@ -1229,3 +1229,31 @@ namespace ModelBuilder.StateMachines
                 [JsonProperty("max")]
                 public int Max { get; set; }
             }
+
+        }
+
+
+        [DotStep.Core.Action(ActionName = "*")]
+        public sealed class CreateOrUpdateEndpoint : TaskState<Context, CheckEndpointStatus>
+        {
+            IAmazonSageMaker sageMaker = new AmazonSageMakerClient();
+            IAmazonS3 s3 = new AmazonS3Client();
+            IAmazonSimpleSystemsManagement ssm = new AmazonSimpleSystemsManagementClient();
+
+            public override async Task<Context> Execute(Context context)
+            {
+                var modelLocation =
+                    $"{context.SceneProvisioningJobWorkspace}object-detection/{context.SceneCode}-{context.SceneProvisioningJobId}/output/model.tar.gz";
+
+                var tags = new AutoConstructedList<Tag>
+                {
+                    new Tag
+                    {
+                        Key = "SceneCode",
+                        Value = context.SceneCode
+                    },
+                    new Tag
+                    {
+                        Key = "SceneProvisioningJobId",
+                        Value = context.SceneProvisioningJobId
+                    }
