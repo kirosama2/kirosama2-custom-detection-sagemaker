@@ -1257,3 +1257,33 @@ namespace ModelBuilder.StateMachines
                         Key = "SceneProvisioningJobId",
                         Value = context.SceneProvisioningJobId
                     }
+                };
+
+                var createModelResponse = await sageMaker.CreateModelAsync(new CreateModelRequest
+                {
+                    ExecutionRoleArn = context.LabelingRoleArn,
+                    ModelName = $"{context.SceneCode}-{context.SceneProvisioningJobId}",
+                    PrimaryContainer = new ContainerDefinition
+                    {
+                        Image = "811284229777.dkr.ecr.us-east-1.amazonaws.com/object-detection:latest",
+                        ModelDataUrl = modelLocation
+                    },
+                    Tags = tags
+                });
+
+
+                var createEndpointConfigResp =
+                    await sageMaker.CreateEndpointConfigAsync(new CreateEndpointConfigRequest
+                    {
+                        EndpointConfigName = context.SceneCode + "-" + context.SceneProvisioningJobId,
+                        ProductionVariants = new List<ProductionVariant>
+                        {
+                            new ProductionVariant
+                            {
+                                InitialInstanceCount = 1,
+                                InitialVariantWeight = 1F,
+                                VariantName = "AllTraffic",
+                                ModelName = context.SceneCode + "-" + context.SceneProvisioningJobId,
+                                InstanceType = await GetProductionVariantInstanceType(modelLocation)
+                            }
+                        },
