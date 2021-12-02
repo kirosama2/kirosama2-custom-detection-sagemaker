@@ -1287,3 +1287,38 @@ namespace ModelBuilder.StateMachines
                                 InstanceType = await GetProductionVariantInstanceType(modelLocation)
                             }
                         },
+                        Tags = tags
+                    });
+
+                try
+                {
+                    var createEndpointResp = await sageMaker.CreateEndpointAsync(new CreateEndpointRequest
+                    {
+                        Tags = tags,
+                        EndpointConfigName = context.SceneCode + "-" + context.SceneProvisioningJobId,
+                        EndpointName = context.SceneCode
+                    });
+                }
+                catch (Exception e)
+                {
+                    if (true)
+                    {
+                        await sageMaker.UpdateEndpointAsync(new UpdateEndpointRequest
+                        {
+                            EndpointConfigName = context.SceneCode + "-" + context.SceneProvisioningJobId,
+                            EndpointName = context.SceneCode
+                        });
+                    }
+                }
+
+
+                await ssm.PutParameterAsync(new PutParameterRequest
+                {
+                    Name = $"/Cameras/{context.CameraKey}/Enabled",
+                    Value = "True",
+                    Type = Amazon.SimpleSystemsManagement.ParameterType.String,
+                    Overwrite = true
+                });
+                
+                return context;
+            }
