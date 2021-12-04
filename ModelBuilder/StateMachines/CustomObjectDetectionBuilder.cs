@@ -1322,3 +1322,33 @@ namespace ModelBuilder.StateMachines
                 
                 return context;
             }
+            
+            public async Task<ProductionVariantInstanceType>  GetProductionVariantInstanceType(string modelLocation)
+            {
+                var metadata = await s3.GetObjectMetadataAsync(
+                    new GetObjectMetadataRequest
+                    {
+                        BucketName = modelLocation.S3Bucket(),
+                        Key = modelLocation.S3Key()
+                    });
+                var modelSizeInBytes = metadata.Headers.ContentLength;
+                var modelSizeInGbs = modelSizeInBytes / 1000000000;
+
+                if (modelSizeInGbs < 5)
+                    return ProductionVariantInstanceType.MlC5Large;
+                if (modelSizeInGbs < 10)
+                    return ProductionVariantInstanceType.MlC52xlarge;
+                if (modelSizeInGbs < 20)
+                    return ProductionVariantInstanceType.MlC54xlarge;
+                if (modelSizeInGbs < 40)
+                    return ProductionVariantInstanceType.MlC59xlarge;
+                if (modelSizeInGbs < 120)
+                    return ProductionVariantInstanceType.MlC518xlarge;
+                throw new Exception($"Model size too big, {modelSizeInGbs} GBs.");
+            }
+            
+        }
+
+        public sealed class Done : PassState
+        {
+            public override bool End => true;
