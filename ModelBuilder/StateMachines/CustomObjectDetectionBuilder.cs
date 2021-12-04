@@ -1352,3 +1352,6 @@ namespace ModelBuilder.StateMachines
         public sealed class Done : PassState
         {
             public override bool End => true;
+        }
+    }
+}
