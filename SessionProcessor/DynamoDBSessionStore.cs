@@ -32,3 +32,15 @@ namespace SessionProcessor
                 {
                     TableName = TableName,
                     Item = item
+                });
+        }
+
+        public async Task DeleteSession(string sessionId)
+        {
+            await dynamoDb.DeleteItemAsync(TableName, new Dictionary<string, AttributeValue>
+            {
+                {"SessionId", new AttributeValue(sessionId)}
+            });
+        }
+    }
+}
