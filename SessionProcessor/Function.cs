@@ -14,4 +14,4 @@ namespace SessionProcessor
 {
     public class Function
     {
-        p
+        private readonly IAmazonSimpleSystems
