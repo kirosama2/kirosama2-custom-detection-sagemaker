@@ -8,4 +8,4 @@ using Amazon.SimpleSystemsManagement;
 using Amazon.SimpleSystemsManagement.Model;
 
 // Assembly attribute to enable the Lambda function's JSON input to be converted into a .NET class.
-[assembly: La
+[assembly: LambdaSerializer(typeof(JsonSe
