@@ -12,4 +12,6 @@ using Amazon.SimpleSystemsManagement.Model;
 
 namespace SessionProcessor
 {
-    public cl
+    public class Function
+    {
+        p
