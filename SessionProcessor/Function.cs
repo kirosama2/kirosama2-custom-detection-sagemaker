@@ -14,4 +14,4 @@ namespace SessionProcessor
 {
     public class Function
     {
-        private readonly IAmazonSimpleSystems
+        private readonly IAmazonSimpleSystemsManagement ssm = new Ama
