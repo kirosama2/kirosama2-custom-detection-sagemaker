@@ -14,4 +14,6 @@ namespace SessionProcessor
 {
     public class Function
     {
-        private readonly IAmazonSimpleSystemsManagement ssm = new AmazonSimpleSystemsManagementClient(
+        private readonly IAmazonSimpleSystemsManagement ssm = new AmazonSimpleSystemsManagementClient();
+
+        public async Task 
