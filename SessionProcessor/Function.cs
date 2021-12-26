@@ -16,4 +16,4 @@ namespace SessionProcessor
     {
         private readonly IAmazonSimpleSystemsManagement ssm = new AmazonSimpleSystemsManagementClient();
 
-        public async Task 
+        public async Task FunctionHandler(dynamic @event, ILam
