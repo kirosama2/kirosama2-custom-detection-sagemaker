@@ -22,4 +22,4 @@ namespace SessionProcessor
             string nextToken = null;
 
             Query:
-            var p
+            var parametersResult = awa
