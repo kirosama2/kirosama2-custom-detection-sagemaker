@@ -21,4 +21,5 @@ namespace SessionProcessor
             var parameters = new List<Parameter>();
             string nextToken = null;
 
- 
+            Query:
+            var p
