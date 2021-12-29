@@ -22,4 +22,4 @@ namespace SessionProcessor
             string nextToken = null;
 
             Query:
-            var parametersResult = awa
+            var parametersResult = await ssm.GetParametersByP
