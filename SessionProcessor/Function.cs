@@ -18,4 +18,4 @@ namespace SessionProcessor
 
         public async Task FunctionHandler(dynamic @event, ILambdaContext context)
         {
-  
+            var parameters = new
