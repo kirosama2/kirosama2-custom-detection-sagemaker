@@ -22,4 +22,6 @@ namespace SessionProcessor
             string nextToken = null;
 
             Query:
-            var parametersResult = await ssm.GetParametersByPathAsync(new GetParametersByPathRequ
+            var parametersResult = await ssm.GetParametersByPathAsync(new GetParametersByPathRequest
+            {
+      
