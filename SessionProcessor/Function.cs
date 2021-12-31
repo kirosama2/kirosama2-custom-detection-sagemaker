@@ -28,4 +28,4 @@ namespace SessionProcessor
                 Recursive = true,
                 NextToken = nextToken
             });
-    
+            parameters.AddRange(pa
