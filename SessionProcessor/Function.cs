@@ -26,4 +26,4 @@ namespace SessionProcessor
             {
                 Path = "/Cameras/",
                 Recursive = true,
-      
+                NextToken = nextT
