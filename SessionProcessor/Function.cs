@@ -29,4 +29,4 @@ namespace SessionProcessor
                 NextToken = nextToken
             });
             parameters.AddRange(parametersResult.Parameters);
-   
+            nextToken = parametersResu
