@@ -25,4 +25,5 @@ namespace SessionProcessor
             var parametersResult = await ssm.GetParametersByPathAsync(new GetParametersByPathRequest
             {
                 Path = "/Cameras/",
+                Recursive = true,
       
