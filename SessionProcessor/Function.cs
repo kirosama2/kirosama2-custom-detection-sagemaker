@@ -24,4 +24,5 @@ namespace SessionProcessor
             Query:
             var parametersResult = await ssm.GetParametersByPathAsync(new GetParametersByPathRequest
             {
+                Path = "/Cameras/",
       
