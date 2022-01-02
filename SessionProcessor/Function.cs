@@ -29,4 +29,5 @@ namespace SessionProcessor
                 NextToken = nextToken
             });
             parameters.AddRange(parametersResult.Parameters);
-            nextToken = parametersResu
+            nextToken = parametersResult.NextToken;
+            if (!s
