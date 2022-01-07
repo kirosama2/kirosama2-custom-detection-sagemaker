@@ -30,4 +30,5 @@ namespace SessionProcessor
             });
             parameters.AddRange(parametersResult.Parameters);
             nextToken = parametersResult.NextToken;
-            if (!string.IsNullOrEmpty(
+            if (!string.IsNullOrEmpty(nextToken))
+                g
