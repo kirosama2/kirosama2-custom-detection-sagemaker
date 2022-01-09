@@ -33,4 +33,6 @@ namespace SessionProcessor
             if (!string.IsNullOrEmpty(nextToken))
                 goto Query;
 
-            var cameraKeys = parameters.Select(p => p.Name.Split('/')[2]).Dis
+            var cameraKeys = parameters.Select(p => p.Name.Split('/')[2]).Distinct();
+
+            foreach (v
