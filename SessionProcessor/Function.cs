@@ -33,4 +33,4 @@ namespace SessionProcessor
             if (!string.IsNullOrEmpty(nextToken))
                 goto Query;
 
-           
+            var cameraKeys = parameters.Sel
