@@ -36,3 +36,5 @@ namespace SessionProcessor
             var cameraKeys = parameters.Select(p => p.Name.Split('/')[2]).Distinct();
 
             foreach (var cameraKey in cameraKeys)
+            {
+     
