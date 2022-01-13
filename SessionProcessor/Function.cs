@@ -37,4 +37,4 @@ namespace SessionProcessor
 
             foreach (var cameraKey in cameraKeys)
             {
-     
+                context.Logger.L
