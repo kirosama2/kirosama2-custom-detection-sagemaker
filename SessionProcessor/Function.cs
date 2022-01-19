@@ -40,4 +40,4 @@ namespace SessionProcessor
                 context.Logger.LogLine($"Processing cameraKey: {cameraKey}");
 
                 var classNames = parameters.Single(p => p.Name == $"/Cameras/{cameraKey}/ClassNames")
-          
+                    .Value.Split(',').ToList();
