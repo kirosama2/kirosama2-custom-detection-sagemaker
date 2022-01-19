@@ -41,3 +41,5 @@ namespace SessionProcessor
 
                 var classNames = parameters.Single(p => p.Name == $"/Cameras/{cameraKey}/ClassNames")
                     .Value.Split(',').ToList();
+
+                var sceneCode
