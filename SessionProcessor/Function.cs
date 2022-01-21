@@ -43,4 +43,6 @@ namespace SessionProcessor
                     .Value.Split(',').ToList();
 
                 var sceneCode = parameters.Single(p => p.Name == $"/Cameras/{cameraKey}/SceneCode")
-                    .Va
+                    .Value;
+
+                var obje
