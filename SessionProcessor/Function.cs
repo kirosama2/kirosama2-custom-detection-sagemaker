@@ -45,4 +45,4 @@ namespace SessionProcessor
                 var sceneCode = parameters.Single(p => p.Name == $"/Cameras/{cameraKey}/SceneCode")
                     .Value;
 
-                var obje
+                var objectMovedDetectionThreshold = 0
