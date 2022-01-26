@@ -47,4 +47,5 @@ namespace SessionProcessor
 
                 var objectMovedDetectionThreshold = 0.25;
 
-                if (p
+                if (parameters.Any(
+              
