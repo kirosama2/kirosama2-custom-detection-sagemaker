@@ -48,4 +48,5 @@ namespace SessionProcessor
                 var objectMovedDetectionThreshold = 0.25;
 
                 if (parameters.Any(
-                    p => p.Name == $"/Cameras/{cameraKey}/ObjectMovedDetectionTh
+                    p => p.Name == $"/Cameras/{cameraKey}/ObjectMovedDetectionThreshold"))
+                    
