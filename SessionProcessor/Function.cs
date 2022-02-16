@@ -49,4 +49,4 @@ namespace SessionProcessor
 
                 if (parameters.Any(
                     p => p.Name == $"/Cameras/{cameraKey}/ObjectMovedDetectionThreshold"))
-                    
+                    objectMovedDetectionThr
