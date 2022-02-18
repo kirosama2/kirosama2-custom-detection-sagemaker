@@ -50,4 +50,6 @@ namespace SessionProcessor
                 if (parameters.Any(
                     p => p.Name == $"/Cameras/{cameraKey}/ObjectMovedDetectionThreshold"))
                     objectMovedDetectionThreshold = Convert.ToDouble(
-                        parameters.Single(p => p.Name == $"/Cameras/{cameraKey}/ObjectMovedDetectionThresho
+                        parameters.Single(p => p.Name == $"/Cameras/{cameraKey}/ObjectMovedDetectionThreshold").Value);
+
+                
