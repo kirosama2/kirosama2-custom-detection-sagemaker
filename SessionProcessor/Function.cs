@@ -53,4 +53,5 @@ namespace SessionProcessor
                         parameters.Single(p => p.Name == $"/Cameras/{cameraKey}/ObjectMovedDetectionThreshold").Value);
 
                 var enabled = Convert.ToBoolean(parameters
-                    .Single(p => p.Name == $"/Camer
+                    .Single(p => p.Name == $"/Cameras/{cameraKey}/Enabled")
+  
