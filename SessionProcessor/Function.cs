@@ -52,4 +52,5 @@ namespace SessionProcessor
                     objectMovedDetectionThreshold = Convert.ToDouble(
                         parameters.Single(p => p.Name == $"/Cameras/{cameraKey}/ObjectMovedDetectionThreshold").Value);
 
-                var enabled = Convert.ToBoolean
+                var enabled = Convert.ToBoolean(parameters
+               
