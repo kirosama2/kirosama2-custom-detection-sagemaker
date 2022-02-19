@@ -54,4 +54,4 @@ namespace SessionProcessor
 
                 var enabled = Convert.ToBoolean(parameters
                     .Single(p => p.Name == $"/Cameras/{cameraKey}/Enabled")
-  
+                    .Value);
