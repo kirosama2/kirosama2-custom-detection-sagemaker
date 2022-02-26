@@ -56,4 +56,6 @@ namespace SessionProcessor
                     .Single(p => p.Name == $"/Cameras/{cameraKey}/Enabled")
                     .Value);
 
-                if (!en
+                if (!enabled) continue;
+
+      
