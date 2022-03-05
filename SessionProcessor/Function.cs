@@ -58,4 +58,6 @@ namespace SessionProcessor
 
                 if (!enabled) continue;
 
-                context.Logger.LogLine($"Processing camera: {came
+                context.Logger.LogLine($"Processing camera: {cameraKey}");
+
+                var sp = new SessionPro
