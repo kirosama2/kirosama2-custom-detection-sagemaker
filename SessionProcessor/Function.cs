@@ -60,4 +60,4 @@ namespace SessionProcessor
 
                 context.Logger.LogLine($"Processing camera: {cameraKey}");
 
-                var sp = new SessionProcessor(cameraKey, 
+                var sp = new SessionProcessor(cameraKey, classNames, sceneCode, objectMovedD
