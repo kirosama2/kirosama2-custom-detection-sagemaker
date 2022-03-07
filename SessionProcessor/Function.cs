@@ -63,4 +63,5 @@ namespace SessionProcessor
                 var sp = new SessionProcessor(cameraKey, classNames, sceneCode, objectMovedDetectionThreshold);
 
                 sp.MetricsLoaded += metrics =>
-  
+                {
+                    
