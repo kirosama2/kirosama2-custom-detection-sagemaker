@@ -64,4 +64,4 @@ namespace SessionProcessor
 
                 sp.MetricsLoaded += metrics =>
                 {
-                    context.Logger.LogLine($"{metrics}
+                    context.Logger.LogLine($"{metrics} metrics loaded. Camera: {c
