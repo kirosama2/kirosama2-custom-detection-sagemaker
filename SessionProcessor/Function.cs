@@ -67,4 +67,6 @@ namespace SessionProcessor
                     context.Logger.LogLine($"{metrics} metrics loaded. Camera: {cameraKey}");
                 };
 
-                sp.ObservationsCreated += (observations, earliest, latest)
+                sp.ObservationsCreated += (observations, earliest, latest) =>
+                {
+                
