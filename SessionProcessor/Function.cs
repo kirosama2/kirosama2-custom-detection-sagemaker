@@ -70,4 +70,4 @@ namespace SessionProcessor
                 sp.ObservationsCreated += (observations, earliest, latest) =>
                 {
                     context.Logger.LogLine(
-                        $"Metrics transformed, number of observations: {observations}, earliest: {ea
+                        $"Metrics transformed, number of observations: {observations}, earliest: {earliest}, latest: {latest}. Camera: 
