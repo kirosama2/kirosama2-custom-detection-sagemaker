@@ -74,4 +74,4 @@ namespace SessionProcessor
                     sp.DiscoverSessions();
                 };
 
-       
+                sp.SessionsDis
