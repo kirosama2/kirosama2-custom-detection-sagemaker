@@ -76,4 +76,4 @@ namespace SessionProcessor
 
                 sp.SessionsDiscovered += sessions =>
                 {
-                    context.Logger.LogLine($
+                    context.Logger.LogLine($"{sessions} sessions discovered. Came
