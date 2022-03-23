@@ -76,4 +76,5 @@ namespace SessionProcessor
 
                 sp.SessionsDiscovered += sessions =>
                 {
-                    context.Logger.LogLine($"{sessions} sessions discovered. Came
+                    context.Logger.LogLine($"{sessions} sessions discovered. Camera: {cameraKey}");
+           
