@@ -78,4 +78,6 @@ namespace SessionProcessor
                 {
                     context.Logger.LogLine($"{sessions} sessions discovered. Camera: {cameraKey}");
                     sp.StoreSessions(false).Wait();
-    
+                };
+
+          
