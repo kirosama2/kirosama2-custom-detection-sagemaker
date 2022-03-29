@@ -80,4 +80,5 @@ namespace SessionProcessor
                     sp.StoreSessions(false).Wait();
                 };
 
-                // this should run 5 check
+                // this should run 5 checks per minute (every 10 seconds).
+     
