@@ -82,4 +82,4 @@ namespace SessionProcessor
 
                 // this should run 5 checks per minute (every 10 seconds).
                 for (var i = 0; i < 5; i++)
-                    await Task.WhenAll(sp.Lo
+                    await Task.WhenAll(sp.LoadMetrics(5), Task.Delay(TimeS
