@@ -2,4 +2,8 @@ using System.Threading.Tasks;
 
 namespace SessionProcessor
 {
-    public interf
+    public interface ISessionStore
+    {
+
+
+        Task 
