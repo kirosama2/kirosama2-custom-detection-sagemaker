@@ -6,4 +6,4 @@ namespace SessionProcessor
     {
 
 
-        Task 
+        Task PutSession(Session session
