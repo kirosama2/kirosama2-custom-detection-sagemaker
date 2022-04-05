@@ -6,4 +6,5 @@ namespace SessionProcessor
     {
 
 
-        Task PutSession(Session session
+        Task PutSession(Session session);
+        Task DeleteSession(string 
