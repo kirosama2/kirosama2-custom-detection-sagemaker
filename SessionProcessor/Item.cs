@@ -1,3 +1,6 @@
 using Newtonsoft.Json;
 
-namespace SessionPro
+namespace SessionProcessor
+{
+    public class Item
+  
