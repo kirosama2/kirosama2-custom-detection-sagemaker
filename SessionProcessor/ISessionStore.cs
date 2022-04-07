@@ -7,4 +7,6 @@ namespace SessionProcessor
 
 
         Task PutSession(Session session);
-        Task DeleteSession(string 
+        Task DeleteSession(string sessionId);
+    }
+}
