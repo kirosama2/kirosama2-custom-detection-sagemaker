@@ -4,4 +4,5 @@ namespace SessionProcessor
 {
     public class Item
     {
-        [JsonPropert
+        [JsonProperty("name")] public string Name { get; set; }
+
