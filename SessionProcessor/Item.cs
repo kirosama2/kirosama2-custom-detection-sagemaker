@@ -6,4 +6,6 @@ namespace SessionProcessor
     {
         [JsonProperty("name")] public string Name { get; set; }
 
-        [JsonProperty("price")] publi
+        [JsonProperty("price")] public decimal Price { get; set; }
+    }
+}
