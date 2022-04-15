@@ -8,4 +8,6 @@ namespace SessionProcessor
     public class ObservationWindow
     {
 
-        private readonly MetricDataResult metricDa
+        private readonly MetricDataResult metricData;
+
+        public Observ
