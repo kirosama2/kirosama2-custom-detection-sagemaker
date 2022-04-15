@@ -6,4 +6,6 @@ using Amazon.CloudWatch.Model;
 namespace SessionProcessor
 {
     public class ObservationWindow
-  
+    {
+
+        private readonly Me
