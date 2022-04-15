@@ -5,4 +5,5 @@ using Amazon.CloudWatch.Model;
 
 namespace SessionProcessor
 {
-    pub
+    public class ObservationWindow
+  
