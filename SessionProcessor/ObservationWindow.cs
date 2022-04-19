@@ -10,4 +10,6 @@ namespace SessionProcessor
 
         private readonly MetricDataResult metricData;
 
-        public ObservationWindow(MetricDataResult metricDat
+        public ObservationWindow(MetricDataResult metricData)
+        {
+            this.
