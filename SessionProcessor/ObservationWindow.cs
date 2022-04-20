@@ -12,4 +12,6 @@ namespace SessionProcessor
 
         public ObservationWindow(MetricDataResult metricData)
         {
-            this.
+            this.metricData = metricData;
+
+   
