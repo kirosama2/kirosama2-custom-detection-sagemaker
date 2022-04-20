@@ -14,4 +14,5 @@ namespace SessionProcessor
         {
             this.metricData = metricData;
 
-            var values = new Dictionary<D
+            var values = new Dictionary<DateTime, double>();
+          
