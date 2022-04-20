@@ -15,4 +15,4 @@ namespace SessionProcessor
             this.metricData = metricData;
 
             var values = new Dictionary<DateTime, double>();
-          
+            var i = metricData.Timestamps
