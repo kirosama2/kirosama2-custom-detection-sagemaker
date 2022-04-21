@@ -15,4 +15,5 @@ namespace SessionProcessor
             this.metricData = metricData;
 
             var values = new Dictionary<DateTime, double>();
-            var i = metricData.Timestamps
+            var i = metricData.Timestamps.Count - 1;
+            foreach (v
