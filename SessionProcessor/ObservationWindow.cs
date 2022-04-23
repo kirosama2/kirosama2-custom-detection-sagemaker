@@ -16,4 +16,5 @@ namespace SessionProcessor
 
             var values = new Dictionary<DateTime, double>();
             var i = metricData.Timestamps.Count - 1;
-            foreach (var timestamp in metricData.Timestamps.Ord
+            foreach (var timestamp in metricData.Timestamps.OrderBy(t => t.Ticks))
+            
