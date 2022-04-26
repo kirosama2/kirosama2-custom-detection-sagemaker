@@ -20,4 +20,6 @@ namespace SessionProcessor
             {
                 var value = metricData.Values[i];
                 values.Add(timestamp, value);
-                i
+                i--;
+            }
+            Va
