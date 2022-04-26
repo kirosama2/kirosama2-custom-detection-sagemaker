@@ -19,4 +19,5 @@ namespace SessionProcessor
             foreach (var timestamp in metricData.Timestamps.OrderBy(t => t.Ticks))
             {
                 var value = metricData.Values[i];
-                values.Ad
+                values.Add(timestamp, value);
+                i
