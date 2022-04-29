@@ -22,4 +22,7 @@ namespace SessionProcessor
                 values.Add(timestamp, value);
                 i--;
             }
-            Va
+            Values = values;
+        }
+
+        public DateTime FirstObs
