@@ -25,4 +25,4 @@ namespace SessionProcessor
             Values = values;
         }
 
-        public DateTime FirstObs
+        public DateTime FirstObservation => metricData.Timestamps.
