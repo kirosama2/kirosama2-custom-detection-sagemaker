@@ -25,4 +25,5 @@ namespace SessionProcessor
             Values = values;
         }
 
-        public DateTime FirstObservation => metricData.Timestamps.
+        public DateTime FirstObservation => metricData.Timestamps.Min();
+        public DateTi
