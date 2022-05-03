@@ -26,4 +26,4 @@ namespace SessionProcessor
         }
 
         public DateTime FirstObservation => metricData.Timestamps.Min();
-        public DateTi
+        public DateTime LastObservation => 
