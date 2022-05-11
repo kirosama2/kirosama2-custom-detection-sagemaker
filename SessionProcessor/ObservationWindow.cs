@@ -30,4 +30,4 @@ namespace SessionProcessor
 
         public string MetricName => metricData.Id;
 
-  
+        public Dictionary<DateTime, d
