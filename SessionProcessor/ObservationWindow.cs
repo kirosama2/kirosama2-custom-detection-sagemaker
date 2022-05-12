@@ -30,4 +30,7 @@ namespace SessionProcessor
 
         public string MetricName => metricData.Id;
 
-        public Dictionary<DateTime, d
+        public Dictionary<DateTime, double> Values { get; }
+
+    }
+}
