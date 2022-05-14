@@ -21,3 +21,11 @@ namespace SessionProcessor
         [JsonProperty("started_at")] public DateTime Started { get; set; }
 
         [JsonProperty("ended_at")] public DateTime Ended { get; set; }
+
+        [JsonProperty("items")] public List<Item> Items { get; set; }
+
+        [JsonProperty("status")]
+        public string Status =>
+            Started > DateTime.MinValue && Ended == DateTime.MinValue ? "IN_PROGRESS" : "COMPLETED";
+    }
+}
