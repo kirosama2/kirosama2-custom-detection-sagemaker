@@ -82,3 +82,30 @@ namespace SessionProcessor
                         {
                             Metric = new Metric
                             {
+                                Namespace = "Cameras",
+                                MetricName = "Confidence",
+                                Dimensions = new AutoConstructedList<Dimension>
+                                {
+                                    new Dimension
+                                    {
+                                        Name = "CameraKey",
+                                        Value = CameraKey
+                                    },
+                                    new Dimension
+                                    {
+                                        Name = "Label",
+                                        Value = "Person"
+                                    },
+                                    new Dimension
+                                    {
+                                        Name = "Source",
+                                        Value = "Rekognition"
+                                    }
+                                }
+                            },
+                            Period = period,
+                            Stat = "Maximum",
+                            Unit = StandardUnit.Percent
+                        },
+                        ReturnData = true
+                    }
