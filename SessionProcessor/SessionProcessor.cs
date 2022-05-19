@@ -51,3 +51,34 @@ namespace SessionProcessor
             foreach (var session in Sessions)
                 switch (session.Status)
                 {
+                    case "COMPLETED":
+                        if (session.Items.Count > 0)
+                            storageTasks.Add(sessionStore.PutSession(session));
+                        else if (storeCompletedSessionsWithNoItems)
+                            storageTasks.Add(sessionStore.PutSession(session));
+                        else storageTasks.Add(sessionStore.DeleteSession(session.Id));
+                        break;
+                    default:
+                        storageTasks.Add(sessionStore.PutSession(session));
+                        break;
+                }
+            await Task.WhenAll(storageTasks);
+        }
+
+        public async Task LoadMetrics(int minutes = 15, int period = 10)
+        {
+            var cloudWatch = new AmazonCloudWatchClient();
+
+            var getMetricRequest = new GetMetricDataRequest
+            {
+                StartTimeUtc = DateTime.UtcNow.Subtract(TimeSpan.FromMinutes(minutes)),
+                EndTimeUtc = DateTime.UtcNow,
+                MetricDataQueries = new AutoConstructedList<MetricDataQuery>
+                {
+                    new MetricDataQuery
+                    {
+                        Id = "Person".ToLower(),
+                        MetricStat = new MetricStat
+                        {
+                            Metric = new Metric
+                            {
