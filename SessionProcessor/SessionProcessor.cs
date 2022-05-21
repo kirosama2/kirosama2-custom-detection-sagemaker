@@ -178,3 +178,43 @@ namespace SessionProcessor
             foreach (var session in Sessions.Where(s => s.Status == "COMPLETED"))
             foreach (var className in ClassNames)
             {
+                var classObservations = ClassObservations.Single(co => co.MetricName == className.ToLower());
+
+                var timeBeforeSession = classObservations.Values.Where(entry => entry.Key < session.Started)
+                    .Max(entry => entry.Key);
+
+                var timeAfterSession = classObservations.Values.Where(entry => entry.Key > session.Ended)
+                    .Min(entry => entry.Key);
+
+                var valueBeforeSession = classObservations.Values[timeBeforeSession];
+                var valueAfterSession = classObservations.Values[timeAfterSession];
+
+                var difference = valueBeforeSession - valueAfterSession;
+                var threshold = valueBeforeSession * ObjectMovedDetectionThreshold;
+
+                if (difference > threshold)
+                    session.Items.Add(new Item
+                    {
+                        Name = className,
+                        Price = 10
+                    });
+            }
+        }
+
+        public void DiscoverSessions()
+        {
+            Sessions = new List<Session>();
+
+            var firstNoPersonFound = false;
+            var personInPreviousEntry = false;
+            var previousEntryTime = new DateTime();
+
+            Session session = null;
+
+            foreach (var personEntry in PersonObservation.Values)
+            {
+                // don't process a session that we don't have a start time for.
+                if (!firstNoPersonFound && personEntry.Value < 20)
+                    firstNoPersonFound = true;
+
+                if (!firstNoPersonFound)
