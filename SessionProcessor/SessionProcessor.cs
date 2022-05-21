@@ -218,3 +218,25 @@ namespace SessionProcessor
                     firstNoPersonFound = true;
 
                 if (!firstNoPersonFound)
+                    continue;
+
+                var personInCurrentEntry = personEntry.Value > 20;
+
+                if (personInCurrentEntry && !personInPreviousEntry)
+                {
+                    session = new Session(CameraKey, personEntry.Key);
+                    Sessions.Add(session);
+                }
+
+                if (personInPreviousEntry && !personInCurrentEntry)
+                    session.Ended = previousEntryTime;
+
+                personInPreviousEntry = personInCurrentEntry;
+                previousEntryTime = personEntry.Key;
+            }
+
+            DiscoverItems();
+            SessionsDiscovered?.Invoke(Sessions.Count);
+        }
+    }
+}
