@@ -138,3 +138,43 @@ namespace SessionProcessor
                                 {
                                     Name = "Source",
                                     Value = PredictionEndpointName
+                                }
+                            }
+                        },
+                        Period = period,
+                        Stat = "Maximum",
+                        Unit = StandardUnit.Percent
+                    },
+                    ReturnData = true
+                });
+
+            var response = await cloudWatch.GetMetricDataAsync(getMetricRequest);
+            MetricData = response.MetricDataResults;
+            MetricsLoaded?.Invoke(MetricData.Count);
+            CreateObservations();
+        }
+
+        private void CreateObservations()
+        {
+            if (MetricData.Count <= 1)
+                return;
+
+            if (!MetricData.All(md => md.Timestamps.Any()))
+                return;
+
+            var personMetrics = MetricData.First();
+            var classMetrics = MetricData.Skip(1).ToList();
+            PersonObservation = new ObservationWindow(personMetrics);
+            ClassObservations = classMetrics.Select(classMetric => new ObservationWindow(classMetric)).ToList();
+
+            ObservationsCreated?.Invoke(
+                PersonObservation.Values.Count,
+                PersonObservation.FirstObservation,
+                PersonObservation.LastObservation);
+        }
+
+        private void DiscoverItems()
+        {
+            foreach (var session in Sessions.Where(s => s.Status == "COMPLETED"))
+            foreach (var className in ClassNames)
+            {
