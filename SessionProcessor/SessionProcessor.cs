@@ -109,3 +109,32 @@ namespace SessionProcessor
                         },
                         ReturnData = true
                     }
+                }
+            };
+
+            foreach (var className in ClassNames)
+                getMetricRequest.MetricDataQueries.Add(new MetricDataQuery
+                {
+                    Id = className.ToLower(),
+                    MetricStat = new MetricStat
+                    {
+                        Metric = new Metric
+                        {
+                            Namespace = "Cameras",
+                            MetricName = "Confidence",
+                            Dimensions = new AutoConstructedList<Dimension>
+                            {
+                                new Dimension
+                                {
+                                    Name = "CameraKey",
+                                    Value = CameraKey
+                                },
+                                new Dimension
+                                {
+                                    Name = "Label",
+                                    Value = className
+                                },
+                                new Dimension
+                                {
+                                    Name = "Source",
+                                    Value = PredictionEndpointName
