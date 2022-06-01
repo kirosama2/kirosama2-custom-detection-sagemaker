@@ -5,4 +5,5 @@
     <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
     <AWSProjectType>Lambda</AWSProjectType>
     <AssemblyName>SessionProcessor</AssemblyName>
-    <RootNamespace>SessionProcessing</RootN
+    <RootNamespace>SessionProcessing</RootNamespace>
+  </PropertyGroup>
