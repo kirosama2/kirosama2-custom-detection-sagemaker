@@ -9,4 +9,4 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageRefere
+    <PackageReference Include="Amazon
