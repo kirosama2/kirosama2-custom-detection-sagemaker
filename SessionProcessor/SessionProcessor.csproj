@@ -7,3 +7,6 @@
     <AssemblyName>SessionProcessor</AssemblyName>
     <RootNamespace>SessionProcessing</RootNamespace>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageRefere
