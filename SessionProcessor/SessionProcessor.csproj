@@ -10,4 +10,4 @@
 
   <ItemGroup>
     <PackageReference Include="Amazon.Lambda.Core" Version="1.0.0" />
-    <PackageReference Incl
+    <PackageReference Include="Amazon.Lambda.Seri
