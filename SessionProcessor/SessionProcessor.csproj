@@ -10,4 +10,5 @@
 
   <ItemGroup>
     <PackageReference Include="Amazon.Lambda.Core" Version="1.0.0" />
-    <PackageReference Include="Amazon.Lambda.Seri
+    <PackageReference Include="Amazon.Lambda.Serialization.Json" Version="1.4.0" />
+    <Packa
