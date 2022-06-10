@@ -13,4 +13,4 @@
     <PackageReference Include="Amazon.Lambda.Serialization.Json" Version="1.4.0" />
     <PackageReference Include="AWSSDK.CloudWatch" Version="3.3.10.6" />
     <PackageReference Include="AWSSDK.CloudWatchEvents" Version="3.3.8.6" />
-    <PackageReference Include="A
+    <PackageReference Include="AWSSDK.DynamoDBv2" Versio
