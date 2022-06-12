@@ -14,4 +14,4 @@
     <PackageReference Include="AWSSDK.CloudWatch" Version="3.3.10.6" />
     <PackageReference Include="AWSSDK.CloudWatchEvents" Version="3.3.8.6" />
     <PackageReference Include="AWSSDK.DynamoDBv2" Version="3.3.17" />
-    <PackageReferen
+    <PackageReference Include="AWSSDK.SimpleSystems
