@@ -37,3 +37,10 @@ namespace SessionProcessor
         public async Task DeleteSession(string sessionId)
         {
             var requestUrl = $"{Endpoint}/object/{sessionId}";
+            using (var httpClient = new HttpClient())
+            {
+                await httpClient.DeleteAsync(requestUrl);
+            }
+        }
+    }
+}
