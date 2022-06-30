@@ -6,3 +6,7 @@ using Amazon.CloudWatch.Model;
 using Amazon.Lambda.Core;
 using DotStep.Core;
 using ModelBuilder.StateMachines;
+
+namespace Tests
+{
+    class 
