@@ -11,4 +11,6 @@ namespace Tests
 {
     class Program
     {
-        static void Main(s
+        static void Main(string[] args)
+        {
+          
