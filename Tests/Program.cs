@@ -9,4 +9,6 @@ using ModelBuilder.StateMachines;
 
 namespace Tests
 {
-    class 
+    class Program
+    {
+        static void Main(s
