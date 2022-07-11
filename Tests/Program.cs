@@ -13,4 +13,5 @@ namespace Tests
     {
         static void Main(string[] args)
         {
-            AWSConfigs.AWSRegion = "us-
+            AWSConfigs.AWSRegion = "us-east-1";
+            var
