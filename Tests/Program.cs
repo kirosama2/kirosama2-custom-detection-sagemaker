@@ -17,4 +17,6 @@ namespace Tests
             var program = new Program();
             //program.TestSessionProcessorAsync().Wait();
 
-            program.TestCreateDashbo
+            program.TestCreateDashboard().Wait();
+        }
+
