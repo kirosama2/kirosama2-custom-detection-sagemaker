@@ -15,4 +15,6 @@ namespace Tests
         {
             AWSConfigs.AWSRegion = "us-east-1";
             var program = new Program();
-            //program.TestSession
+            //program.TestSessionProcessorAsync().Wait();
+
+          
