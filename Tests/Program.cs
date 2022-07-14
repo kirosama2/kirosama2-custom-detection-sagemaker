@@ -20,4 +20,6 @@ namespace Tests
             program.TestCreateDashboard().Wait();
         }
 
-        public async Task TestCr
+        public async Task TestCreateDashboard()
+        {
+    
