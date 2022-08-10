@@ -30,4 +30,5 @@ namespace Tests
                     
                 },
                 SceneCode = "jfk14scene",
-                CameraKey = "deeplens_PiaX2Z4dTQeJG7
+                CameraKey = "deeplens_PiaX2Z4dTQeJG7vG41vVtw",
+                Region = "us
