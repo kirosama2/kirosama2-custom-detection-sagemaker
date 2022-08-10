@@ -29,4 +29,5 @@ namespace Tests
                     "Purell", "Marker", "Eracer"
                     
                 },
-                SceneCode = 
+                SceneCode = "jfk14scene",
+                Camer
