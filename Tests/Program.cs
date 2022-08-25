@@ -33,4 +33,6 @@ namespace Tests
                 CameraKey = "deeplens_PiaX2Z4dTQeJG7vG41vVtw",
                 Region = "us-east-1"
             };
-            var createDashboardTask = new ProvisionScene.CreateDas
+            var createDashboardTask = new ProvisionScene.CreateDashboard();
+
+            await
