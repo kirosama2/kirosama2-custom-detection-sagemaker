@@ -39,4 +39,4 @@ namespace Tests
         }
 
 
-        public async T
+        public async Task TestSessionProcessorAsync()
