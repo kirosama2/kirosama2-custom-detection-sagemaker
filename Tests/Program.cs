@@ -43,4 +43,4 @@ namespace Tests
         {
             var sessionProcessorFunction = new SessionProcessor.Function();
 
-            await sessionProcesso
+            await sessionProcessorFunction.FunctionHandler(
