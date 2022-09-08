@@ -41,4 +41,6 @@ namespace Tests
 
         public async Task TestSessionProcessorAsync()
         {
-            var sessionProcessorFunction = n
+            var sessionProcessorFunction = new SessionProcessor.Function();
+
+ 
