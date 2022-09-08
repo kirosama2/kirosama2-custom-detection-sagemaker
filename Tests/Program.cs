@@ -41,4 +41,4 @@ namespace Tests
 
         public async Task TestSessionProcessorAsync()
         {
-            var sessi
+            var sessionProcessorFunction = n
