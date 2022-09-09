@@ -43,4 +43,8 @@ namespace Tests
         {
             var sessionProcessorFunction = new SessionProcessor.Function();
 
-            await sessionProcessorFunction.FunctionHandler(new { }, new LambdaContext()
+            await sessionProcessorFunction.FunctionHandler(new { }, new LambdaContext());
+        }
+    }
+
+    public 
