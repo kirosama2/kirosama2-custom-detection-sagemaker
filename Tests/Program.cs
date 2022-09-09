@@ -47,4 +47,4 @@ namespace Tests
         }
     }
 
-    public 
+    public class ConsoleLogger : ILambdaLogger {
