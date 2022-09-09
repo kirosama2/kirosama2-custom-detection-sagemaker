@@ -48,3 +48,4 @@ namespace Tests
     }
 
     public class ConsoleLogger : ILambdaLogger {
+        public void L
