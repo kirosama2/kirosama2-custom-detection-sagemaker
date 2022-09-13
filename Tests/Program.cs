@@ -50,4 +50,7 @@ namespace Tests
     public class ConsoleLogger : ILambdaLogger {
         public void Log(string message)
         {
-            Console.Write(messag
+            Console.Write(message);
+        }
+
+        public voi
