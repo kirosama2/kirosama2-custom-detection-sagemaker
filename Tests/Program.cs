@@ -53,4 +53,6 @@ namespace Tests
             Console.Write(message);
         }
 
-        public voi
+        public void LogLine(string message)
+        {
+      
