@@ -55,4 +55,4 @@ namespace Tests
 
         public void LogLine(string message)
         {
-      
+            Console.WriteLine(mes
