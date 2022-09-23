@@ -62,4 +62,5 @@ namespace Tests
 
     public class LambdaContext : ILambdaContext {
 
-        
+        public LambdaContext()
+     
