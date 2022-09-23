@@ -60,4 +60,6 @@ namespace Tests
     }
 
 
-    public class LambdaContext 
+    public class LambdaContext : ILambdaContext {
+
+        
