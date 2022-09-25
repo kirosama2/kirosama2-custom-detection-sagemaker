@@ -64,4 +64,7 @@ namespace Tests
 
         public LambdaContext()
         {
-         Logger = new Consol
+         Logger = new ConsoleLogger();   
+        }
+
+ 
