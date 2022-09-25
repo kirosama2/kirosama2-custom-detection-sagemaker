@@ -67,4 +67,5 @@ namespace Tests
          Logger = new ConsoleLogger();   
         }
 
-        public string AwsRequ
+        public string AwsRequestId { get; }
+        publi
