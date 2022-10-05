@@ -68,4 +68,4 @@ namespace Tests
         }
 
         public string AwsRequestId { get; }
-        publi
+        public IClientContext Cli
