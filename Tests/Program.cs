@@ -70,4 +70,5 @@ namespace Tests
         public string AwsRequestId { get; }
         public IClientContext ClientContext { get; }
         public string FunctionName { get; }
-        public string Functio
+        public string FunctionVersion { get; }
+        publ
