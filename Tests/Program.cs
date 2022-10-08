@@ -71,4 +71,5 @@ namespace Tests
         public IClientContext ClientContext { get; }
         public string FunctionName { get; }
         public string FunctionVersion { get; }
-        public ICognitoIdentity Identity
+        public ICognitoIdentity Identity { get; }
+        public string
