@@ -72,4 +72,5 @@ namespace Tests
         public string FunctionName { get; }
         public string FunctionVersion { get; }
         public ICognitoIdentity Identity { get; }
-        public string
+        public string InvokedFunctionArn { get; }
+    
