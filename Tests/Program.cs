@@ -74,4 +74,5 @@ namespace Tests
         public ICognitoIdentity Identity { get; }
         public string InvokedFunctionArn { get; }
         public ILambdaLogger Logger { get; }
-        public string LogGroupN
+        public string LogGroupName { get; }
+        public s
