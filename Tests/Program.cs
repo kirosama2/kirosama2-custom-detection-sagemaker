@@ -75,4 +75,5 @@ namespace Tests
         public string InvokedFunctionArn { get; }
         public ILambdaLogger Logger { get; }
         public string LogGroupName { get; }
-        public s
+        public string LogStreamName { get; }
+ 
