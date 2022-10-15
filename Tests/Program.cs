@@ -76,4 +76,4 @@ namespace Tests
         public ILambdaLogger Logger { get; }
         public string LogGroupName { get; }
         public string LogStreamName { get; }
- 
+        public int MemoryLimit
