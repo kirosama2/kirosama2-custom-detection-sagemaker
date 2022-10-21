@@ -77,4 +77,8 @@ namespace Tests
         public string LogGroupName { get; }
         public string LogStreamName { get; }
         public int MemoryLimitInMB { get; }
-        public TimeSpan RemainingTime { g
+        public TimeSpan RemainingTime { get; }
+    }
+
+
+}
