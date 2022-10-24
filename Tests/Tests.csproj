@@ -1,1 +1,4 @@
-<Project Sdk="Microso
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Ou
