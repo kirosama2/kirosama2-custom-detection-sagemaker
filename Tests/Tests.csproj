@@ -2,4 +2,4 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <T
+    <TargetFramework>netcoreapp2.1</Ta
