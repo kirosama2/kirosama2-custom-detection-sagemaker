@@ -6,4 +6,4 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectRef
+    <ProjectReference Include="..\M
