@@ -6,4 +6,5 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ModelBuilder\ModelBuilder.cs
+    <ProjectReference Include="..\ModelBuilder\ModelBuilder.csproj" />
+    <ProjectReference 
