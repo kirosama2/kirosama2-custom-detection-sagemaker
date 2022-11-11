@@ -7,4 +7,5 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ModelBuilder\ModelBuilder.csproj" />
-    <ProjectReference Include="..\SessionProcessor\S
+    <ProjectReference Include="..\SessionProcessor\SessionProcessor.csproj" />
+  </ItemGr
