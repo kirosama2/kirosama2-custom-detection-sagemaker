@@ -1,0 +1,18 @@
+
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Parameters": {
+    "SourceCodeZip": {
+      "Type": "String",
+      "Default": "https://codeload.github.com/aws-samples/amazon-sagemaker-custom-object-detection/zip/master"
+    },
+    "SourceCodeDirectory": {
+      "Type": "String",
+      "Default": "custom-object-detection-master"
+    }
+  },
+  "Resources": {
+    "CodeInitializer": {
+      "Type": "Custom::CodeInitializer",
+      "Version": "1.0",
+      "Properties": {
