@@ -95,3 +95,29 @@
           }
         },
         "FunctionName": { "Fn::Sub": "${AWS::StackName}-initializer" },
+        "Handler": "index.handler",
+        "MemorySize": 128,
+        "Role": { "Fn::GetAtt": [ "CodeInitializerRole", "Arn" ] },
+        "Runtime": "nodejs8.10",
+        "Timeout": 120
+      }
+    },
+    "CodeInitializerRole": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "ManagedPolicyArns": [
+          "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+        ],
+        "Policies": [
