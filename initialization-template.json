@@ -73,3 +73,25 @@
                 "});",
                 "});",
                 "}",
+                "};",
+                "function download(url, cb) {",
+                "var data = [];",
+                "var request = require('https').get(url, function(res) {",
+                "",
+                "res.on('data', function(chunk) {",
+                "data.push(chunk);",
+                "});",
+                "res.on('end', function() {",
+                "var buffer = Buffer.concat(data);",
+                "cb(buffer);",
+                "});",
+                "});",
+                "request.on('error', function(e) {",
+                "console.log('Got error: ' + e.message);",
+                "});",
+                "}"
+              ]
+            ]
+          }
+        },
+        "FunctionName": { "Fn::Sub": "${AWS::StackName}-initializer" },
