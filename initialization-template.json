@@ -121,3 +121,37 @@
           "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
         ],
         "Policies": [
+          {
+            "PolicyName": "CodeInitialization",
+            "PolicyDocument": {
+              "Statement": [
+                {
+                  "Effect": "Allow",
+                  "Resource": { "Fn::GetAtt": [ "ArtifactBucket", "Arn" ] },
+                  "Action": "s3:ListObjects"
+                },
+                {
+                  "Action": [
+                    "s3:PutObject",
+                    "s3:DeleteObject"
+                  ],
+                  "Resource": {
+                    "Fn::Join": [
+                      "/",
+                      [
+                        { "Fn::GetAtt": [ "ArtifactBucket", "Arn" ] },
+                        { "Ref": "AWS::StackName" },
+                        "*"
+                      ]
+                    ]
+                  },
+                  "Effect": "Allow"
+                },
+                {
+                  "Effect": "Allow",
+                  "Action": [ "codebuild:StartBuild" ],
+                  "Resource": { "Fn::GetAtt": [ "CodeBuildInitializerProject", "Arn" ] }
+                }
+              ],
+              "Version": "2012-10-17"
+            }
