@@ -155,3 +155,31 @@
               ],
               "Version": "2012-10-17"
             }
+          }
+        ],
+        "RoleName": { "Fn::Sub": "${AWS::StackName}-initializer-role" }
+      }
+    },
+    "CodeCommitRepository": {
+      "Type": "AWS::CodeCommit::Repository",
+      "Properties": {
+        "RepositoryName": { "Ref": "AWS::StackName" }
+      }
+    },
+    "CodeBuildRole": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "codebuild.amazonaws.com"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "Path": "/service-role/",
+        "Policies": [
