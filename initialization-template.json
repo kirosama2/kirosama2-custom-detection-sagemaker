@@ -183,3 +183,31 @@
         },
         "Path": "/service-role/",
         "Policies": [
+          {
+            "PolicyName": "CodeBuildPolicy",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Effect": "Allow",
+                  "Resource": [
+                    { "Fn::Sub": "arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/codebuild/${AWS::StackName}" },
+                    { "Fn::Sub": "arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/codebuild/${AWS::StackName}:*" }
+                  ],
+                  "Action": [
+                    "logs:CreateLogGroup",
+                    "logs:CreateLogStream",
+                    "logs:PutLogEvents"
+                  ]
+                },
+                {
+                  "Effect": "Allow",
+                  "Resource":"*",
+                  "Action":[
+                    "s3:*",
+                    "iam:*",
+                    "lambda:*",
+                    "cloudformation:*",
+                    "events:*",
+                    "cloudwatch:*",
+                    "dynamodb:*"
