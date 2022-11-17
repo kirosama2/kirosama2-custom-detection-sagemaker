@@ -237,3 +237,35 @@
         ],
         "RoleName": {
           "Fn::Join": [
+            "-",
+            [
+              "code-build",
+              { "Ref": "AWS::StackName" },
+              { "Ref": "AWS::Region" },
+              "service-role"
+            ]
+          ]
+        }
+      }
+    },
+    "CodeBuildInitializerRole": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "codebuild.amazonaws.com"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "Path": "/service-role/",
+        "ManagedPolicyArns": [
+          "arn:aws:iam::aws:policy/AWSCodeCommitFullAccess",
+          "arn:aws:iam::aws:policy/IAMUserSSHKeys",
+          "arn:aws:iam::aws:policy/IAMSelfManageServiceSpecificCredentials",
+          "arn:aws:iam::aws:policy/IAMUserChangePassword",
