@@ -269,3 +269,28 @@
           "arn:aws:iam::aws:policy/IAMUserSSHKeys",
           "arn:aws:iam::aws:policy/IAMSelfManageServiceSpecificCredentials",
           "arn:aws:iam::aws:policy/IAMUserChangePassword",
+          "arn:aws:iam::aws:policy/IAMReadOnlyAccess"
+        ],
+        "Policies": [
+          {
+            "PolicyName": "CodeInitializerPolicy",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Effect": "Allow",
+                  "Resource": [
+                    { "Fn::Sub": "arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/codebuild/${AWS::StackName}-initializer" },
+                    { "Fn::Sub": "arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/codebuild/${AWS::StackName}-initializer:*" }
+                  ],
+                  "Action": [
+                    "logs:CreateLogGroup",
+                    "logs:CreateLogStream",
+                    "logs:PutLogEvents"
+                  ]
+                },
+                {
+                  "Effect": "Allow",
+                  "Resource": [
+                    { "Fn::Sub": "arn:aws:s3:::codepipeline-${AWS::Region}-*" }
+                  ],
