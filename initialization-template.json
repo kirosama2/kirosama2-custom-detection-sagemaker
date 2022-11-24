@@ -294,3 +294,35 @@
                   "Resource": [
                     { "Fn::Sub": "arn:aws:s3:::codepipeline-${AWS::Region}-*" }
                   ],
+                  "Action": [
+                    "s3:PutObject",
+                    "s3:GetObject",
+                    "s3:GetObjectVersion"
+                  ]
+                },
+                {
+                  "Effect": "Allow",
+                  "Resource": [
+                    { "Fn::Sub": "arn:aws:s3:::${ArtifactBucket}/${AWS::StackName}/initialization.zip" }
+                  ],
+                  "Action": [
+                    "s3:GetObject",
+                    "s3:GetObjectVersion"
+                  ]
+                },
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "ssm:GetParameters"
+                  ],
+                  "Resource": { "Fn::Sub": "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/CodeBuild/*" }
+                }
+              ]
+            }
+          }
+        ],
+        "RoleName": {
+          "Fn::Join": [
+            "-",
+            [
+              "code-build",
