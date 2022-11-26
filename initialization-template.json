@@ -326,3 +326,38 @@
             "-",
             [
               "code-build",
+              { "Ref": "AWS::StackName" },
+              "initializer",
+              { "Ref": "AWS::Region" },
+              "service-role"
+            ]
+          ]
+        }
+      }
+    },
+    "CodeBuildInitializerProject": {
+      "Type": "AWS::CodeBuild::Project",
+      "DependsOn": [ "ArtifactBucket" ],
+      "Properties": {
+        "ServiceRole": { "Fn::GetAtt": [ "CodeBuildInitializerRole", "Arn" ] },
+        "Name": { "Fn::Sub": "${AWS::StackName}-initializer" },
+        "Source": {
+          "Type": "S3",
+          "Location": { "Fn::Sub": "arn:aws:s3:::${ArtifactBucket}/${AWS::StackName}/initialization.zip" },
+          "BuildSpec": { "Fn::Sub": "version: 0.1\nphases:\n  build:\n    commands:\n      - git config --global user.name \"code-build\"\n      - git config --global user.email \"code-build@example.com\"\n      - git config --global credential.helper '!aws codecommit credential-helper $@'\n      - git config --global credential.UseHttpPath true\n      - cd ./${SourceCodeDirectory} && git init && git remote add origin https://git-codecommit.${AWS::Region}.amazonaws.com/v1/repos/${AWS::StackName} && git add * && git commit -m \"Initialization\" && git push -u origin master" }
+        },
+        "Environment": {
+          "ComputeType": "BUILD_GENERAL1_SMALL",
+          "Image": "aws/codebuild/nodejs:7.0.0",
+          "Type": "LINUX_CONTAINER"
+        },
+        "Artifacts": {
+          "Type": "NO_ARTIFACTS"
+        }
+      }
+    },
+    "ArtifactBucket": {
+      "Type": "AWS::S3::Bucket",
+      "Properties": {
+        "BucketName": { "Fn::Sub": "codepipeline-${AWS::Region}-${AWS::AccountId}-${AWS::StackName}" }
+      }
