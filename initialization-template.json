@@ -588,3 +588,36 @@
     "CloudFormationDeployerFunction": {
       "Type": "AWS::Lambda::Function",
       "Properties": {
+        "Code": {
+          "ZipFile": {
+            "Fn::Join": [
+              "\n",
+              [
+                "var AWS = require('aws-sdk');",
+                "var codepipeline = new AWS.CodePipeline();",
+                "var cloudformation = new AWS.CloudFormation();",
+                "exports.handler = (event, context, callback) => {",
+                "var job = event['CodePipeline.job'];",
+                "var s3Location = job.data.inputArtifacts[0].location.s3Location;",
+                "var bucket = s3Location.bucketName;",
+                "var key = s3Location.objectKey;",
+                "var projectName = s3Location.objectKey.split('/')[0];",
+                "var region = context.invokedFunctionArn.split(':')[3];",
+                "var params = {",
+                "StackName: projectName + '-deployment',",
+                "Capabilities: [",
+                "'CAPABILITY_NAMED_IAM'",
+                "],",
+                "Parameters: [",
+                "{",
+                "ParameterKey: 'CodeS3Bucket',",
+                "ParameterValue: bucket,",
+                "UsePreviousValue: false",
+                "},",
+                "{",
+                "ParameterKey: 'CodeS3Key',",
+                "ParameterValue: key,",
+                "UsePreviousValue: false",
+                "}",
+                "],",
+                "Tags: [",
