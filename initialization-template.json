@@ -556,3 +556,35 @@
         "ManagedPolicyArns": [
           "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
         ],
+        "Policies": [
+          {
+            "PolicyName": "DeployerPolicy",
+            "PolicyDocument": {
+              "Statement": [
+                {
+                  "Action": [
+                    "cloudformation:ListStacks",
+                    "cloudformation:UpdateStack",
+                    "cloudformation:CreateStack",
+                    "codepipeline:PutJobSuccessResult",
+                    "codepipeline:PutJobFailureResult",
+                    "iam:*",
+                    "states:*",
+                    "lambda:*",
+                    "ssm:*",
+                    "cognito-identity:*",
+                    "s3:*"
+                  ],
+                  "Resource": "*",
+                  "Effect": "Allow"
+                }
+              ]
+            }
+          }
+        ],
+        "RoleName": { "Fn::Sub": "${AWS::StackName}-deployer-role" }
+      }
+    },
+    "CloudFormationDeployerFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
