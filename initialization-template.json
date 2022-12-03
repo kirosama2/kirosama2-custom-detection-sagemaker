@@ -646,3 +646,39 @@
                 "return cloudformation.updateStack(params).promise();",
                 "}",
                 "else",
+                "return cloudformation.createStack(params).promise();",
+                "})",
+                ".then(result => {",
+                "console.log('Job success.');",
+                "return codepipeline.putJobSuccessResult({jobId: job.id}).promise();",
+                "})",
+                ".catch(error => {",
+                "console.log('Job FAILED: ', error);",
+                "return codepipeline.putJobFailureResult(",
+                "{",
+                "jobId: job.id,",
+                "failureDetails:{",
+                "message: JSON.stringify(error),",
+                "type: 'JobFailed'}}).promise();",
+                "})",
+                ".then(result => {",
+                "callback(null, 'done');",
+                "});",
+                "};"
+              ]
+            ]
+          }
+        },
+        "FunctionName": { "Fn::Sub": "${AWS::StackName}-deployer" },
+        "Handler": "index.handler",
+        "MemorySize": 128,
+        "Role": { "Fn::GetAtt": [ "CloudFormationDeployerFunctionRole", "Arn" ] },
+        "Runtime": "nodejs8.10",
+        "Timeout": 120
+      }
+    },
+    "CodePipeline": {
+      "Type": "AWS::CodePipeline::Pipeline",
+      "DependsOn": [ "CodeCommitRepository", "CodeBuildProject", "CloudFormationDeployerFunction", "CodeInitializerFunction" ],
+      "Properties": {
+        "ArtifactStore": {
