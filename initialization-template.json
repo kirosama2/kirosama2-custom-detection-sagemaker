@@ -682,3 +682,36 @@
       "DependsOn": [ "CodeCommitRepository", "CodeBuildProject", "CloudFormationDeployerFunction", "CodeInitializerFunction" ],
       "Properties": {
         "ArtifactStore": {
+          "Location": { "Ref": "ArtifactBucket" },
+          "Type": "S3"
+        },
+        "Name": { "Ref": "AWS::StackName" },
+        "RoleArn": { "Fn::GetAtt": [ "CodePipelineRole", "Arn" ] },
+        "Stages": [
+          {
+            "Actions": [
+              {
+                "ActionTypeId": {
+                  "Category": "Source",
+                  "Owner": "AWS",
+                  "Provider": "CodeCommit",
+                  "Version": "1"
+                },
+                "Configuration": {
+                  "RepositoryName": { "Ref": "AWS::StackName" },
+                  "BranchName": "master"
+                },
+                "Name": "Source",
+                "OutputArtifacts": [
+                  {
+                    "Name": "MyApp"
+                  }
+                ]
+              }
+            ],
+            "Name": "Source"
+          },
+          {
+            "Actions": [
+              {
+                "ActionTypeId": {
