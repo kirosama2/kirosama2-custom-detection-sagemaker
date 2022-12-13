@@ -715,3 +715,31 @@
             "Actions": [
               {
                 "ActionTypeId": {
+                  "Category": "Build",
+                  "Owner": "AWS",
+                  "Provider": "CodeBuild",
+                  "Version": "1"
+                },
+                "Configuration": {
+                  "ProjectName": { "Ref": "AWS::StackName" }
+                },
+                "Name": "Build",
+                "InputArtifacts": [
+                  {
+                    "Name": "MyApp"
+                  }
+                ],
+                "OutputArtifacts": [
+                  {
+                    "Name": "MyAppBuild"
+                  }
+                ]
+              }
+            ],
+            "Name": "Build"
+          },
+          {
+            "Actions": [
+              {
+                "Name": "DeployBuiltCode",
+                "ActionTypeId": {
