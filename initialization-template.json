@@ -743,3 +743,25 @@
               {
                 "Name": "DeployBuiltCode",
                 "ActionTypeId": {
+                  "Category": "Invoke",
+                  "Owner": "AWS",
+                  "Provider": "Lambda",
+                  "Version": "1"
+                },
+                "Configuration": {
+                  "FunctionName": { "Fn::Sub": "${AWS::StackName}-deployer" }
+                },
+                "InputArtifacts": [
+                  {
+                    "Name": "MyAppBuild"
+                  }
+                ]
+              }
+            ],
+            "Name": "Deploy"
+          }
+        ]
+      }
+    }
+  }
+}
