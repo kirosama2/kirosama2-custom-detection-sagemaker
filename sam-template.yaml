@@ -1,1 +1,2 @@
-AWSTemplateFormatVersion: '2010-0
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-
