@@ -3,4 +3,5 @@ Transform: AWS::Serverless-2016-10-31
 Resources:
     ImageProcessorFunction:
         Type: AWS::Serverless::Function
-        Prope
+        Properties:
+            CodeUri: ./I
