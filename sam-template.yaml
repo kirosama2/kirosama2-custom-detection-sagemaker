@@ -4,4 +4,4 @@ Resources:
     ImageProcessorFunction:
         Type: AWS::Serverless::Function
         Properties:
-            CodeUri: ./I
+            CodeUri: ./ImageProcessor/bin/Deb
