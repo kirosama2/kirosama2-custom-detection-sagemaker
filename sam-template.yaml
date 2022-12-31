@@ -4,4 +4,5 @@ Resources:
     ImageProcessorFunction:
         Type: AWS::Serverless::Function
         Properties:
-            CodeUri: ./ImageProcessor/bin/Deb
+            CodeUri: ./ImageProcessor/bin/Debug/netcoreapp2.1/publish/
+            
