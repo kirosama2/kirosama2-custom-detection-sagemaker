@@ -7,4 +7,5 @@ Resources:
             CodeUri: ./ImageProcessor/bin/Debug/netcoreapp2.1/publish/
             Handler: ImageProcessor::ImageProcessor.Function::FunctionHandler
             Runtime: dotnetcore2.1
-            Timeout: 1
+            Timeout: 100
+            Policies:
