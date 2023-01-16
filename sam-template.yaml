@@ -9,4 +9,4 @@ Resources:
             Runtime: dotnetcore2.1
             Timeout: 100
             Policies:
-             - AWSLam
+             - AWSLambdaExecute # Managed Poli
