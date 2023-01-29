@@ -10,4 +10,5 @@ Resources:
             Timeout: 100
             Policies:
              - AWSLambdaExecute # Managed Policy
-             - Version:
+             - Version: '2012-10-17' # Policy Document
+       
