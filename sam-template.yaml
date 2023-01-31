@@ -11,4 +11,5 @@ Resources:
             Policies:
              - AWSLambdaExecute # Managed Policy
              - Version: '2012-10-17' # Policy Document
-       
+               Statement:
+     
