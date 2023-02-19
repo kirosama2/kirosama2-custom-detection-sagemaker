@@ -15,4 +15,5 @@ Resources:
                  - Effect: Allow
                    Action:
                      - cloudwatch:*
-                   
+                     - ssm:*
+              
