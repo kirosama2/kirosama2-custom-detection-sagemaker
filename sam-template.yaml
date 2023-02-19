@@ -13,4 +13,5 @@ Resources:
              - Version: '2012-10-17' # Policy Document
                Statement:
                  - Effect: Allow
-     
+                   Action:
+                
