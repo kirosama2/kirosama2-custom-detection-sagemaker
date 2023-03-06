@@ -16,4 +16,5 @@ Resources:
                    Action:
                      - cloudwatch:*
                      - ssm:*
+                     - rekognition:*
               
