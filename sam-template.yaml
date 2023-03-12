@@ -18,4 +18,5 @@ Resources:
                      - ssm:*
                      - rekognition:*
                      - sagemaker:*
-     
+                     - s3:*
+      
