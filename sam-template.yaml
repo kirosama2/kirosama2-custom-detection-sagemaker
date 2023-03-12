@@ -20,4 +20,5 @@ Resources:
                      - sagemaker:*
                      - s3:*
                    Resource: '*'
-    SessionPr
+    SessionProcessorFunction:
+        Type: 
