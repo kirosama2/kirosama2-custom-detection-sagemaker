@@ -17,4 +17,5 @@ Resources:
                      - cloudwatch:*
                      - ssm:*
                      - rekognition:*
-              
+                     - sagemaker:*
+     
