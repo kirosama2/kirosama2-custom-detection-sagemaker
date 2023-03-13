@@ -21,4 +21,5 @@ Resources:
                      - s3:*
                    Resource: '*'
     SessionProcessorFunction:
-        Type: 
+        Type: AWS::Serverless::Function
+       
