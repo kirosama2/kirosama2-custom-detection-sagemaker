@@ -23,4 +23,4 @@ Resources:
     SessionProcessorFunction:
         Type: AWS::Serverless::Function
         Properties:
-            CodeUri
+            CodeUri: ./SessionProcessor/bin/Debug/n
