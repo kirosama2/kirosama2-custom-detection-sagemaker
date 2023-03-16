@@ -22,4 +22,5 @@ Resources:
                    Resource: '*'
     SessionProcessorFunction:
         Type: AWS::Serverless::Function
-       
+        Properties:
+            CodeUri
