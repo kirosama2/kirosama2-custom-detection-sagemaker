@@ -23,4 +23,5 @@ Resources:
     SessionProcessorFunction:
         Type: AWS::Serverless::Function
         Properties:
-            CodeUri: ./SessionProcessor/bin/Debug/n
+            CodeUri: ./SessionProcessor/bin/Debug/netcoreapp2.1/publish/
+      
