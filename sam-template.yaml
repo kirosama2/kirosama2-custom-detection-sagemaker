@@ -24,4 +24,5 @@ Resources:
         Type: AWS::Serverless::Function
         Properties:
             CodeUri: ./SessionProcessor/bin/Debug/netcoreapp2.1/publish/
-            Handler: SessionProcessor::SessionProcessor.Function::FunctionHandle
+            Handler: SessionProcessor::SessionProcessor.Function::FunctionHandler
+            Runtime: dotnetcore2.
