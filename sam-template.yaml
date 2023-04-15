@@ -27,3 +27,5 @@ Resources:
             Handler: SessionProcessor::SessionProcessor.Function::FunctionHandler
             Runtime: dotnetcore2.1
             Timeout: 100
+            Policies:
+          
