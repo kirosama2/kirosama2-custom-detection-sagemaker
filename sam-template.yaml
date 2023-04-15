@@ -28,4 +28,4 @@ Resources:
             Runtime: dotnetcore2.1
             Timeout: 100
             Policies:
-          
+             - AWSLambdaExecute # Managed Po
