@@ -28,4 +28,5 @@ Resources:
             Runtime: dotnetcore2.1
             Timeout: 100
             Policies:
-             - AWSLambdaExecute # Managed Po
+             - AWSLambdaExecute # Managed Policy
+             - Version: '201
