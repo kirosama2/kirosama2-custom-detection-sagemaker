@@ -35,4 +35,5 @@ Resources:
                    Action:
                      - cloudwatch:*
                      - ssm:*
-               
+                     - dynamodb:*
+                   Resou
