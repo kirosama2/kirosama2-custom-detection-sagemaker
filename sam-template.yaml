@@ -36,4 +36,5 @@ Resources:
                      - cloudwatch:*
                      - ssm:*
                      - dynamodb:*
-                   Resou
+                   Resource: '*'
+            Even
