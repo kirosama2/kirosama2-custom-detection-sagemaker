@@ -37,4 +37,5 @@ Resources:
                      - ssm:*
                      - dynamodb:*
                    Resource: '*'
-            Even
+            Events:
+                Proces
