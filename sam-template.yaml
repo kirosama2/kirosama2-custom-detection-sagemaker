@@ -38,4 +38,5 @@ Resources:
                      - dynamodb:*
                    Resource: '*'
             Events:
-                Proces
+                ProcessSessions:
+                  Type: Sc
