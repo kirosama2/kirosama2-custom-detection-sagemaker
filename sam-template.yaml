@@ -39,4 +39,5 @@ Resources:
                    Resource: '*'
             Events:
                 ProcessSessions:
-                  Type: Sc
+                  Type: Schedule
+                  P
