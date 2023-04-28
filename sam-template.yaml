@@ -40,4 +40,5 @@ Resources:
             Events:
                 ProcessSessions:
                   Type: Schedule
-                  P
+                  Properties:
+                    Sc
