@@ -41,4 +41,5 @@ Resources:
                 ProcessSessions:
                   Type: Schedule
                   Properties:
-                    Sc
+                    Schedule: rate(1 minute)
+    D
