@@ -42,4 +42,5 @@ Resources:
                   Type: Schedule
                   Properties:
                     Schedule: rate(1 minute)
-    DeepLensMotionDetecti
+    DeepLensMotionDetection:
+        Type: 'AWS::Server
