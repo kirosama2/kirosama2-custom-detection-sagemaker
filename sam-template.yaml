@@ -42,4 +42,4 @@ Resources:
                   Type: Schedule
                   Properties:
                     Schedule: rate(1 minute)
-    D
+    DeepLensMotionDetecti
