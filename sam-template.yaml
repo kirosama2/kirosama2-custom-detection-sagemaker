@@ -43,4 +43,5 @@ Resources:
                   Properties:
                     Schedule: rate(1 minute)
     DeepLensMotionDetection:
-        Type: 'AWS::Server
+        Type: 'AWS::Serverless::Function'
+        Pr
