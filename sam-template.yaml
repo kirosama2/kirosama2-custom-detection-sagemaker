@@ -46,4 +46,5 @@ Resources:
         Type: 'AWS::Serverless::Function'
         Properties:
           CodeUri: ./DetectMovement/
-          Han
+          Handler: lambda.function_handler
+     
