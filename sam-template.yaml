@@ -45,4 +45,5 @@ Resources:
     DeepLensMotionDetection:
         Type: 'AWS::Serverless::Function'
         Properties:
-          CodeUri: ./D
+          CodeUri: ./DetectMovement/
+          Han
