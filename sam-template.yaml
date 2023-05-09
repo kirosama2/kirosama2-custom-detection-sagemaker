@@ -48,4 +48,4 @@ Resources:
           CodeUri: ./DetectMovement/
           Handler: lambda.function_handler
           MemorySize: 1536
-   
+          Runtime: python2.7
