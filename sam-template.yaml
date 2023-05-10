@@ -50,4 +50,5 @@ Resources:
           MemorySize: 1536
           Runtime: python2.7
           Timeout: 30
-    Tr
+    TrackedSessionsTable:
+        
