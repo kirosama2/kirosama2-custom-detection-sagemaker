@@ -51,4 +51,5 @@ Resources:
           Runtime: python2.7
           Timeout: 30
     TrackedSessionsTable:
-        
+        Type: AWS::DynamoDB::Table
+     
