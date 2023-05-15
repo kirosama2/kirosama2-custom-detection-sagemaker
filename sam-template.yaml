@@ -53,4 +53,5 @@ Resources:
     TrackedSessionsTable:
         Type: AWS::DynamoDB::Table
         Properties:
-            AttributeDefinit
+            AttributeDefinitions:
+             - Attrib
