@@ -52,4 +52,5 @@ Resources:
           Timeout: 30
     TrackedSessionsTable:
         Type: AWS::DynamoDB::Table
-     
+        Properties:
+            AttributeDefinit
