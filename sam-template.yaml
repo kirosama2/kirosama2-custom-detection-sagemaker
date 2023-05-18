@@ -55,4 +55,5 @@ Resources:
         Properties:
             AttributeDefinitions:
              - AttributeType: S
-               Attri
+               AttributeName: SessionId
+            
