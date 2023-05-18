@@ -54,4 +54,5 @@ Resources:
         Type: AWS::DynamoDB::Table
         Properties:
             AttributeDefinitions:
-             - Attrib
+             - AttributeType: S
+               Attri
