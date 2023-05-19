@@ -56,4 +56,5 @@ Resources:
             AttributeDefinitions:
              - AttributeType: S
                AttributeName: SessionId
-            
+             #- AttributeType: S
+             #
