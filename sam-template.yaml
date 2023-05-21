@@ -57,4 +57,5 @@ Resources:
              - AttributeType: S
                AttributeName: SessionId
              #- AttributeType: S
-             #
+             #  AttributeName: Started
+    
