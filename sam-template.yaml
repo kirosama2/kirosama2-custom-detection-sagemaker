@@ -60,4 +60,5 @@ Resources:
              #  AttributeName: Started
              #- AttributeType: S
              #  AttributeName: Ended
-             #- AttributeType
+             #- AttributeType: S
+             #  Attribut
