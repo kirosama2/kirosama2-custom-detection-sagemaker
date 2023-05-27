@@ -61,4 +61,5 @@ Resources:
              #- AttributeType: S
              #  AttributeName: Ended
              #- AttributeType: S
-             #  Attribut
+             #  AttributeName: Items
+           
