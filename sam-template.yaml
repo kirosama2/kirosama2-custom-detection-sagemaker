@@ -62,4 +62,4 @@ Resources:
              #  AttributeName: Ended
              #- AttributeType: S
              #  AttributeName: Items
-           
+            BillingMode: PAY_PER_REQUEST
