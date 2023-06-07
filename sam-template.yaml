@@ -65,4 +65,5 @@ Resources:
             BillingMode: PAY_PER_REQUEST
             KeySchema:
              - AttributeName: SessionId
-   
+               KeyType: HASH
+    
