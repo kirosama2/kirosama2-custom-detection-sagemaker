@@ -66,4 +66,4 @@ Resources:
             KeySchema:
              - AttributeName: SessionId
                KeyType: HASH
-            TableName: TrackedSess
+            TableName: TrackedSessions
