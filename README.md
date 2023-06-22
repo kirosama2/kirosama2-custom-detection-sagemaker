@@ -5,4 +5,4 @@ The project showcases how to create a custom object detection model to track obj
 ![Architecture](./documentation/CustomObjectDetectionArchitecture.png)
 
 ## AWS Services Used
-D
+Details of the use of various AWS 
