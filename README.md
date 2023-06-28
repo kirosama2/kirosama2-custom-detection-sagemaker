@@ -7,4 +7,5 @@ The project showcases how to create a custom object detection model to track obj
 ## AWS Services Used
 Details of the use of various AWS services are provided in a well-structured table in the original markdown file for an in-depth understanding.
 
-## Scene Provisioning
+## Scene Provisioning Workflow
+Refer the origina
