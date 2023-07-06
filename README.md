@@ -11,4 +11,7 @@ Details of the use of various AWS services are provided in a well-structured tab
 Refer the original markdown for a graphical representation of the Scene Provisioning Workflow.
 
 ## Installation
-Follow the install instructions provided in the original markdown for
+Follow the install instructions provided in the original markdown for the perfect setup.
+
+## Session Tracking
+Afte
