@@ -14,4 +14,4 @@ Refer the original markdown for a graphical representation of the Scene Provisio
 Follow the install instructions provided in the original markdown for the perfect setup.
 
 ## Session Tracking
-Afte
+After proper setup, sessions and objec
