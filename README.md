@@ -14,4 +14,6 @@ Refer the original markdown for a graphical representation of the Scene Provisio
 Follow the install instructions provided in the original markdown for the perfect setup.
 
 ## Session Tracking
-After proper setup, sessions and objects can be tracked and observed in the DynamoDB table named 'TrackedSe
+After proper setup, sessions and objects can be tracked and observed in the DynamoDB table named 'TrackedSessions'.
+
+### Relevant Paramet
