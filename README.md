@@ -17,4 +17,4 @@ Follow the install instructions provided in the original markdown for the perfec
 After proper setup, sessions and objects can be tracked and observed in the DynamoDB table named 'TrackedSessions'.
 
 ### Relevant Parameters
-Relevant parameters are listed as a table in the original markdow
+Relevant parameters are listed as a table in the original markdown for easy reference and setup.
